@@ -46,8 +46,8 @@ public class RestaurantController {
     @PutMapping("/{restaurantId}")
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant, @PathVariable Long restaurantId) {
         try {
-            restaurantService.updateRestaurant(restaurant, restaurantId);
-            return ResponseEntity.ok().build();
+
+            return ResponseEntity.ok(restaurantService.updateRestaurant(restaurant, restaurantId));
         } catch (RestaurantNotFoundException e) {
             return ResponseEntity.notFound().build();
         }

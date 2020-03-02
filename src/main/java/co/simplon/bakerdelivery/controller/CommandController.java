@@ -52,7 +52,7 @@ public class CommandController {
     public ResponseEntity<Command> updateCommand(@RequestBody Command command, @PathVariable Long commandId) {
 
         try {
-            commandService.updateCommand(command, commandId);
+
             return ResponseEntity.ok(commandService.updateCommand(command, commandId));
         } catch (CommandNotFoundException e) {
             return ResponseEntity.notFound().build();
