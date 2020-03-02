@@ -14,10 +14,10 @@ public interface RestaurantService {
 
     Optional<Restaurant> getRestaurantById(Long restaurantId);
 
-    ResponseEntity<Restaurant> createRestaurant(Restaurant restaurant);
+    Restaurant createRestaurant(Restaurant restaurant);
 
     Restaurant updateRestaurant(Restaurant restaurant, Long restaurantId);
 
-    ResponseEntity<Restaurant> deleteRestaurant(Long restaurantId);
+    Boolean deleteRestaurant(Long restaurantId);
 
 }

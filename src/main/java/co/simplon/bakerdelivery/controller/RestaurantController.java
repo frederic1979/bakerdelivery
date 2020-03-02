@@ -34,7 +34,12 @@ public class RestaurantController {
 
     @PostMapping
     public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) {
-        return restaurantService.createRestaurant(restaurant);
+        try {
+            return ResponseEntity.ok(restaurantService.createRestaurant(restaurant));
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 
@@ -51,7 +56,9 @@ public class RestaurantController {
     @DeleteMapping("/{restaurantId}")
     public ResponseEntity<Restaurant> deleteRestaurant(@PathVariable Long restaurantId) {
 
-        return restaurantService.deleteRestaurant(restaurantId);
+        if (restaurantService.deleteRestaurant(restaurantId)) {
+            return ResponseEntity.noContent().build();
+        } else return ResponseEntity.notFound().build();
 
     }
 }

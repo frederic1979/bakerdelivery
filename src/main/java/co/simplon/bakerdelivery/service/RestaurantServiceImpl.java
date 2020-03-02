@@ -34,8 +34,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public ResponseEntity<Restaurant> createRestaurant(Restaurant restaurant) { //à quoi sert le ResponseEntity ici ?
-        return ResponseEntity.ok(restaurantRepository.save(restaurant));
+    public Restaurant createRestaurant(Restaurant restaurant) { //à quoi sert le ResponseEntity ici ?
+        return restaurantRepository.save(restaurant);
     }
 
 
@@ -51,12 +51,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 
     @Override
-    public ResponseEntity<Restaurant> deleteRestaurant(Long restaurantId) {
+    public Boolean deleteRestaurant(Long restaurantId) {
         if (restaurantRepository.existsById(restaurantId)) {
             restaurantRepository.deleteById(restaurantId);
-            return ResponseEntity.ok().build();
+            return true;
         } else {
-            return ResponseEntity.notFound().build();
+            return false;
         }
 
     }
