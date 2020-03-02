@@ -34,13 +34,10 @@ public class CommandServiceImpl implements CommandService {
 
 
     @Override
-    public ResponseEntity<Command> getCommandById(Long commandId) {
+    public Optional<Command> getCommandById(Long commandId) {
         // d'abord on voit si la commande correspondant à cet ID existe
         Optional<Command> command = commandRepository.findById(commandId); //comme le findById est un optional,la command n'existe pas forcemm, on aura pas un type command mais Optional<Command>
-        if (command.isPresent()) {
-            return ResponseEntity.ok(command.get());
-        } else return ResponseEntity.notFound().build();
-
+        return command;
     }
 
     @Override

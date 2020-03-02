@@ -26,14 +26,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public ResponseEntity<Restaurant> getRestaurantById(Long restaurantId) {
+    public Optional<Restaurant> getRestaurantById(Long restaurantId) {
         Optional<Restaurant> restaurant = restaurantRepository.findById(restaurantId);
-        if (restaurant.isPresent()) {
-            return ResponseEntity.ok(restaurant.get()); //Pensez au .get() une methode de l'optional
-
-        } else {
-            return ResponseEntity.notFound().build();
-        } //explication .notFound().build()?*/
+        return restaurant;
 
     }
 

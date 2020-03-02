@@ -31,8 +31,9 @@ public class CommandController {
 
     @GetMapping("/{commandId}")
     public ResponseEntity<Command> getCommandById(@PathVariable Long commandId) {
-
-        return commandService.getCommandById(commandId);
+        if (commandService.getCommandById(commandId).isPresent()){
+        return ResponseEntity.ok(commandService.getCommandById(commandId).get());}
+        else return ResponseEntity.notFound().build();
 
     }
 

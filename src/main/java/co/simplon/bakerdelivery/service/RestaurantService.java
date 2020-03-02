@@ -12,7 +12,7 @@ public interface RestaurantService {
 
     List<Restaurant> getRestaurants();
 
-    ResponseEntity<Restaurant> getRestaurantById(Long restaurantId);
+    Optional<Restaurant> getRestaurantById(Long restaurantId);
 
     ResponseEntity<Restaurant> createRestaurant(Restaurant restaurant);
 
