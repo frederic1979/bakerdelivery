@@ -1,5 +1,6 @@
 package co.simplon.bakerdelivery.service;
 
+import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.model.Command;
 import co.simplon.bakerdelivery.repository.CommandRepository;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,9 @@ public interface CommandService {
 
     Command createCommand(Command command);
 
-    ResponseEntity<Command> updateCommand(Command command, Long commandId);
+    Command updateCommand(Command command, Long commandId) throws CommandNotFoundException;
 
-    ResponseEntity<Command> deleteCommand(Long commandId);
+    Boolean deleteCommand(Long commandId);
 
     List<Command> getCommandsByRestaurant(Long restaurantId);
 

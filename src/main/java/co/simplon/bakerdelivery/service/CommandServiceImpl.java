@@ -1,5 +1,6 @@
 package co.simplon.bakerdelivery.service;
 
+import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.model.Command;
 import co.simplon.bakerdelivery.repository.CommandRepository;
 import co.simplon.bakerdelivery.repository.RestaurantRepository;
@@ -47,24 +48,22 @@ public class CommandServiceImpl implements CommandService {
 
 
     @Override
-    public ResponseEntity<Command> updateCommand(Command command, Long commandId) {
+    public Command updateCommand(Command command, Long commandId) throws CommandNotFoundException {
 
-        if (commandRepository.existsById(commandId)) {
-            command.setId(commandId);
+            if (!commandRepository.existsById(commandId))
+                throw new CommandNotFoundException();
+            command.setId(commandId); //si on ne met pas le set, on créé des news
             commandRepository.save(command);
-            return ResponseEntity.ok().build(); //l'appi Rest renverra un 200OK , si on fait return ResponseEntity.ok(commandRepository.save(command)) on a aussi la command à jour qui s'affiche
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+            return command;
 
     }
 
     @Override
-    public ResponseEntity<Command> deleteCommand(Long commandId) {
-        if (commandRepository.existsById(commandId)) {
+    public Boolean deleteCommand(Long commandId) {
+        if (commandRepository.existsById((commandId))) {
             commandRepository.deleteById(commandId);
-            return ResponseEntity.ok().build();
-        } else return ResponseEntity.notFound().build();
+            return true;
+        } else return false;
 
     }
 

@@ -1,6 +1,7 @@
 package co.simplon.bakerdelivery.service;
 
 import co.simplon.bakerdelivery.controller.RestaurantController;
+import co.simplon.bakerdelivery.exception.RestaurantNotFoundException;
 import co.simplon.bakerdelivery.model.Restaurant;
 import co.simplon.bakerdelivery.repository.RestaurantRepository;
 import org.springframework.http.ResponseEntity;
@@ -39,14 +40,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 
     @Override
-    public ResponseEntity<Restaurant> updateRestaurant(Restaurant restaurant, Long restaurantId) {
+    public Restaurant updateRestaurant(Restaurant restaurant, Long restaurantId) throws RestaurantNotFoundException {
         if (restaurantRepository.existsById(restaurantId)) {
-            //Set l'id du resto'--> on lui dit que l'id du resto à sauv est celui qui est dans l'url
             restaurant.setId(restaurantId);
-            return ResponseEntity.ok(restaurantRepository.save(restaurant));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+            return restaurantRepository.save(restaurant);
+        } else
+            throw new RestaurantNotFoundException();
+
     }
 
 
@@ -60,9 +60,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
     }
-
-
-
 
 
 }

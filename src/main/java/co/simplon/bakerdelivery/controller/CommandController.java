@@ -1,5 +1,6 @@
 package co.simplon.bakerdelivery.controller;
 
+import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.model.Command;
 import co.simplon.bakerdelivery.service.CommandService;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +32,9 @@ public class CommandController {
 
     @GetMapping("/{commandId}")
     public ResponseEntity<Command> getCommandById(@PathVariable Long commandId) {
-        if (commandService.getCommandById(commandId).isPresent()){
-        return ResponseEntity.ok(commandService.getCommandById(commandId).get());}
-        else return ResponseEntity.notFound().build();
+        if (commandService.getCommandById(commandId).isPresent()) {
+            return ResponseEntity.ok(commandService.getCommandById(commandId).get());
+        } else return ResponseEntity.notFound().build();
 
     }
 
@@ -49,12 +50,22 @@ public class CommandController {
 
     @PutMapping("/{commandId}")
     public ResponseEntity<Command> updateCommand(@RequestBody Command command, @PathVariable Long commandId) {
-        return commandService.updateCommand(command, commandId);
+
+        try {
+            commandService.updateCommand(command, commandId);
+            return ResponseEntity.ok(commandService.updateCommand(command, commandId));
+        } catch (CommandNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{commandId}")
     public ResponseEntity<Command> deleteCommand(@PathVariable Long commandId) {
-        return commandService.deleteCommand(commandId);
+        if (commandService.deleteCommand(commandId)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("restaurant/{restaurantId}")

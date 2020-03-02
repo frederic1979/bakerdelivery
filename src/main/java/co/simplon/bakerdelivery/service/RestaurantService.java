@@ -16,7 +16,7 @@ public interface RestaurantService {
 
     ResponseEntity<Restaurant> createRestaurant(Restaurant restaurant);
 
-    ResponseEntity<Restaurant> updateRestaurant(Restaurant restaurant, Long restaurantId);
+    Restaurant updateRestaurant(Restaurant restaurant, Long restaurantId);
 
     ResponseEntity<Restaurant> deleteRestaurant(Long restaurantId);
 

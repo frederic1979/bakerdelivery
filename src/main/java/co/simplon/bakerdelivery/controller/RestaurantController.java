@@ -1,5 +1,6 @@
 package co.simplon.bakerdelivery.controller;
 
+import co.simplon.bakerdelivery.exception.RestaurantNotFoundException;
 import co.simplon.bakerdelivery.model.Restaurant;
 import co.simplon.bakerdelivery.service.RestaurantService;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +27,9 @@ public class RestaurantController {
 
     @GetMapping("/{restaurantId}")
     public ResponseEntity<Restaurant> getRestaurantById(@PathVariable Long restaurantId) {
-        if (restaurantService.getRestaurantById(restaurantId).isPresent()){
-        return ResponseEntity.ok(restaurantService.getRestaurantById(restaurantId).get());}
-        else return ResponseEntity.notFound().build();
+        if (restaurantService.getRestaurantById(restaurantId).isPresent()) {
+            return ResponseEntity.ok(restaurantService.getRestaurantById(restaurantId).get());
+        } else return ResponseEntity.notFound().build();
     }
 
     @PostMapping
@@ -39,7 +40,12 @@ public class RestaurantController {
 
     @PutMapping("/{restaurantId}")
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant, @PathVariable Long restaurantId) {
-        return restaurantService.updateRestaurant(restaurant, restaurantId);
+        try {
+            restaurantService.updateRestaurant(restaurant, restaurantId);
+            return ResponseEntity.ok().build();
+        } catch (RestaurantNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{restaurantId}")

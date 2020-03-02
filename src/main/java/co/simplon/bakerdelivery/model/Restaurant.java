@@ -16,7 +16,8 @@ public class Restaurant {
     @Column (nullable = false)
     private String name;
 
-
+   /* @OneToMany(mappedBy = "restaurant")
+    private List<Command> commands = new ArrayList<>();*/
 
 
     public Long getId() {

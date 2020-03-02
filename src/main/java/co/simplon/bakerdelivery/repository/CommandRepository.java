@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface CommandRepository extends JpaRepository<Command,Long> {
 
-     List<Command> findCommandsByRestaurantId(Long restaurantId); // Spring va interpreter tt seul et sait qu 'il doit chercher via le restaurantId et pas restaurant !!
+     List<Command> findCommandsByRestaurantId(Long restaurantId); //Derriere il y a du code SQL Spring va interpreter tt seul et sait qu 'il doit chercher via le restaurantId et pas restaurant !!
 
      @Query()
      List<Command> findCommandsByDate(LocalDate date); // idem spring écrit tt seul la methode
