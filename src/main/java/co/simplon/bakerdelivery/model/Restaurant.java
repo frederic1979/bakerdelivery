@@ -1,5 +1,6 @@
 package co.simplon.bakerdelivery.model;
 
+import lombok.Value;
 import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 
 @Entity
+@Value //Lombock va implementer les getter setter equals hashcode..
 public class Restaurant {
 
     @Id

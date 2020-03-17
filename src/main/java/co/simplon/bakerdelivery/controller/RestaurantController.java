@@ -1,8 +1,7 @@
 package co.simplon.bakerdelivery.controller;
 
-import co.simplon.bakerdelivery.dto.RestaurantDTO;
+import co.simplon.bakerdelivery.dto.RestaurantDto;
 import co.simplon.bakerdelivery.exception.RestaurantNotFoundException;
-import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.mappers.RestaurantMapper;
 import co.simplon.bakerdelivery.model.Restaurant;
 import co.simplon.bakerdelivery.service.RestaurantService;
@@ -22,8 +21,7 @@ public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
 
-
-     RestaurantMapper restaurantMapper;
+    RestaurantMapper restaurantMapper;
 
     /*public RestaurantController(RestaurantService restaurantService) {
 
@@ -37,9 +35,9 @@ public class RestaurantController {
 
     //J'ai tenté le DTO ici, j'attends ta valid avant de poursuivre
     @GetMapping("/{restaurantId}")
-    public ResponseEntity<RestaurantDTO> getRestaurantById(@PathVariable Long restaurantId) {
+    public ResponseEntity<RestaurantDto> getRestaurantById(@PathVariable Long restaurantId) {
         if (restaurantService.getRestaurantById(restaurantId).isPresent()) {
-            Optional<Restaurant> restaurant=restaurantService.getRestaurantById(restaurantId);
+            Optional<Restaurant> restaurant = restaurantService.getRestaurantById(restaurantId);
             return ResponseEntity.ok(restaurantMapper.toDto(restaurant));
         } else return ResponseEntity.notFound().build();
     }

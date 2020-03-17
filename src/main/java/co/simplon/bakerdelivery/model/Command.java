@@ -1,10 +1,13 @@
 package co.simplon.bakerdelivery.model;
 
+import lombok.Value;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 
 @Entity
+@Value
 public class Command {
 
     @Id

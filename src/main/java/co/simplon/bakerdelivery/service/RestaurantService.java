@@ -1,8 +1,6 @@
 package co.simplon.bakerdelivery.service;
 
-import co.simplon.bakerdelivery.dto.RestaurantDTO;
 import co.simplon.bakerdelivery.model.Restaurant;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
