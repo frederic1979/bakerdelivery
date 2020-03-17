@@ -15,7 +15,7 @@ public interface CommandRepository extends JpaRepository<Command,Long> {
 
      List<Command> findCommandsByRestaurantId(Long restaurantId); //Derriere il y a du code SQL Spring va interpreter tt seul et sait qu 'il doit chercher via le restaurantId et pas restaurant !!
 
-     @Query()
+     //@Query pas nécessaire, juste si je veux implémenter avec du sql ensuite
      List<Command> findCommandsByDate(LocalDate date); // idem spring écrit tt seul la methode
 
      List<Command> findCommandsByDateAndRestaurantId(LocalDate date, Long restaurantId); //idem spring implémente cette methode findCommandsByDateAndRestaurant

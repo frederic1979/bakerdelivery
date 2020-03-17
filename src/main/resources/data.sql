@@ -1,30 +1,30 @@
 
 
-insert into restaurant values (restaurant_seq_id.nextval, 'LE JARDIN PECHEUR');
-insert into restaurant values (restaurant_seq_id.nextval, 'JOYA');
-insert into restaurant values (restaurant_seq_id.nextval, 'I BOAT');
-insert into restaurant values (restaurant_seq_id.nextval, 'LE RE');
-insert into restaurant values (restaurant_seq_id.nextval, 'L''ANNEXE');
-insert into restaurant values (restaurant_seq_id.nextval, 'COIN DES COPAINS');
-insert into restaurant values (restaurant_seq_id.nextval, 'L''EVIDENCE CAFE');
-insert into restaurant values (restaurant_seq_id.nextval, 'CHEZ AURELE');
-insert into restaurant values (restaurant_seq_id.nextval, 'PASTEL');
-insert into restaurant values (restaurant_seq_id.nextval, 'LE MIROIR');
-insert into restaurant values (restaurant_seq_id.nextval, 'CHEZ MEME');
-insert into restaurant values (restaurant_seq_id.nextval, 'TOTTO');
-insert into restaurant values (restaurant_seq_id.nextval, ' LE NEW-YORK');
-insert into restaurant values (restaurant_seq_id.nextval, 'BIG');
-insert into restaurant values (restaurant_seq_id.nextval, 'MAISON MERE');
-insert into restaurant values (restaurant_seq_id.nextval, 'L''ORLEANS');
-insert into restaurant values (restaurant_seq_id.nextval, 'LE 5');
-insert into restaurant values (restaurant_seq_id.nextval, 'LE VENETO');
-insert into restaurant values (restaurant_seq_id.nextval, 'HARRIET''S CAFE');
-insert into restaurant values (restaurant_seq_id.nextval, 'BRASSERIE TOURNY');
-insert into restaurant values (restaurant_seq_id.nextval, 'BISTROT MIMI');
-insert into restaurant values (restaurant_seq_id.nextval, 'LEOPOLD');
-insert into restaurant values (restaurant_seq_id.nextval, 'BONNE MER');
-insert into restaurant values (restaurant_seq_id.nextval, 'BISTROT ANETO');
-insert into restaurant values (restaurant_seq_id.nextval, 'COIN DES COPAINS');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'LE JARDIN PECHEUR','5 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'JOYA','3 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'I BOAT','3 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant(id,name,adresse,email) values (restaurant_seq_id.nextval, 'LE RE','325 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant(id,name,adresse,email) values (restaurant_seq_id.nextval, 'L''ANNEXE','96 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'COIN DES COPAINS','78 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'L''EVIDENCE CAFE','3 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'CHEZ AURELE','3 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'PASTEL','78 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'LE MIROIR','3652 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'CHEZ MEME','22 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'TOTTO','','');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, ' LE NEW-YORK','','');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'BIG','','');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'MAISON MERE','','');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'L''ORLEANS','','');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'LE 5','','');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'LE VENETO','3 rue de la paix','f.buono@wanadoo.com');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'HARRIET''S CAFE','','');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'BRASSERIE TOURNY','','');
+insert into restaurant (id,name,adresse,email) values (restaurant_seq_id.nextval, 'BISTROT MIMI','','');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'LEOPOLD','','');
+insert into restaurant(id,name,adresse,email) values (restaurant_seq_id.nextval, 'BONNE MER','','');
+insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'BISTROT ANETO','','');
+insert into restaurant (id,name,adresse,email) values (restaurant_seq_id.nextval, 'COIN DES COPAINS','','');
 
 
 

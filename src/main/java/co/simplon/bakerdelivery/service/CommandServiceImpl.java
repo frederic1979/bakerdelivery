@@ -4,6 +4,7 @@ import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.model.Command;
 import co.simplon.bakerdelivery.repository.CommandRepository;
 import co.simplon.bakerdelivery.repository.RestaurantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +18,18 @@ import java.util.Optional;
 @Service
 public class CommandServiceImpl implements CommandService {
 
+    @Autowired
     CommandRepository commandRepository;
+    @Autowired
     RestaurantRepository restaurantRepository;
 
 
     //Constructeur
-    public CommandServiceImpl(CommandRepository commandRepository, RestaurantRepository restaurantRepository) {
+    /*private CommandServiceImpl(CommandRepository commandRepository, RestaurantRepository restaurantRepository) {
         this.commandRepository = commandRepository;
         this.restaurantRepository = restaurantRepository;
 
-    }
+    }*/
 
     @Override
     public List<Command> getCommands() {

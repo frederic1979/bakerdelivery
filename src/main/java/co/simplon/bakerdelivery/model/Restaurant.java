@@ -1,5 +1,7 @@
 package co.simplon.bakerdelivery.model;
 
+import net.bytebuddy.asm.Advice;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +15,18 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_seq_id")
     private Long id;
 
-    @Column (nullable = false)
+    @Column
     private String name;
+
+    @Column
+    private String adresse;
+
+    @Column
+    private String email;
 
    /* @OneToMany(mappedBy = "restaurant")
     private List<Command> commands = new ArrayList<>();*/
+
 
 
     public Long getId() {
@@ -35,6 +44,20 @@ public class Restaurant {
     public void setName(String name) {
         this.name = name;
     }
+    public String getAdresse() {
+        return adresse;
+    }
 
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 }

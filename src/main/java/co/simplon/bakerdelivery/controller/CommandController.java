@@ -3,25 +3,30 @@ package co.simplon.bakerdelivery.controller;
 import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.model.Command;
 import co.simplon.bakerdelivery.service.CommandService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("api/bakerdelivery/command")
+@RequestMapping("api/bakerdelivery/commands")
+@CrossOrigin("*")
 public class CommandController {
 
-
+    @Autowired
     CommandService commandService;
 
-    //On fait le constructeur
-    public CommandController(CommandService commandService) {
+    //On fait le constructeur, inutile avec autowired
+
+    /*public CommandController(CommandService commandService) {
         this.commandService = commandService;
-    }
+    }*/
 
 
     @GetMapping
@@ -32,9 +37,12 @@ public class CommandController {
 
     @GetMapping("/{commandId}")
     public ResponseEntity<Command> getCommandById(@PathVariable Long commandId) {
-        if (commandService.getCommandById(commandId).isPresent()) {
-            return ResponseEntity.ok(commandService.getCommandById(commandId).get());
-        } else return ResponseEntity.notFound().build();
+        Optional<Command> command = commandService.getCommandById(commandId);
+        if (command.isPresent()) {
+            return ResponseEntity.ok(command.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
 
     }
 
@@ -81,12 +89,18 @@ public class CommandController {
 
 
     @GetMapping("date/{date}")
-    public List<Command> getCommandsByDate(@PathVariable String date) {
-        LocalDate newDate = LocalDate.parse(date); //on convertit notre string en LocalDate
-        return commandService.getCommandsByDate(newDate);
+    public ResponseEntity<?> getCommandsByDate(@PathVariable String date) {
+        try {
+            LocalDate newDate = LocalDate.parse(date);
+            return ResponseEntity.ok(commandService.getCommandsByDate(newDate));
+        }//on convertit notre string en LocalDate
+        catch (DateTimeParseException e) {
+            return ResponseEntity.badRequest().body("pb date..");
+        }
+
     }
 
-    @GetMapping("{date}/{restaurantId}")
+    @GetMapping("date/{date}/{restaurantId}")
     public List<Command> getCommandsByDateAndRestaurant(@PathVariable String date, @PathVariable Long restaurantId) {
         LocalDate newDate = LocalDate.parse(date);
         return commandService.getCommandsByDateAndRestaurantId(newDate, restaurantId);
