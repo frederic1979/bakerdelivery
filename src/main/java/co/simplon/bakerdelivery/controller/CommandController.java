@@ -1,6 +1,7 @@
 package co.simplon.bakerdelivery.controller;
 
 import co.simplon.bakerdelivery.exception.CommandNotFoundException;
+import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.model.Command;
 import co.simplon.bakerdelivery.service.CommandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class CommandController {
     @Autowired
     CommandService commandService;
 
+    @Autowired
+    CommandMapper commandMapper;
+
     //On fait le constructeur, inutile avec autowired
 
     /*public CommandController(CommandService commandService) {
@@ -31,14 +35,18 @@ public class CommandController {
 
     @GetMapping
     public List<Command> getCommands() {
+
         return commandService.getCommands();
     }
+
 
 
     @GetMapping("/{commandId}")
     public ResponseEntity<Command> getCommandById(@PathVariable Long commandId) {
         Optional<Command> command = commandService.getCommandById(commandId);
         if (command.isPresent()) {
+            System.out.println("Commande ID : " +commandMapper.map(commandService.getCommandById(commandId).get()).getId());
+            System.out.println("Restaurant ID : " +commandMapper.map(commandService.getCommandById(commandId).get()).getRestaurantId());
             return ResponseEntity.ok(command.get());
         } else {
             return ResponseEntity.notFound().build();
