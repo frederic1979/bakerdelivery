@@ -4,7 +4,7 @@ import co.simplon.bakerdelivery.dto.RestaurantDto;
 import co.simplon.bakerdelivery.model.Restaurant;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface RestaurantMapper {
     RestaurantDto map(Restaurant restaurant);
 }

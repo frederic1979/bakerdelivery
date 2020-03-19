@@ -34,11 +34,13 @@ RestaurantMapper restaurantMapper;
         return restaurantService.getRestaurants();
     }
 
-    //J'ai tenté le DTO ici, j'attends ta valid avant de poursuivre
+
     @GetMapping("/{restaurantId}")
     public ResponseEntity<RestaurantDto> getRestaurantById(@PathVariable Long restaurantId) {
-        if (restaurantService.getRestaurantById(restaurantId).isPresent()) {
-            Optional<Restaurant> restaurant = restaurantService.getRestaurantById(restaurantId);
+        Optional<Restaurant> restaurant = restaurantService.getRestaurantById(restaurantId);
+        System.out.println("le nom du resto est" +restaurantMapper.map(restaurant.get()));
+        if (restaurant.isPresent()) {
+
                         return ResponseEntity.ok(restaurantMapper.map(restaurant.get()));
         } else return ResponseEntity.notFound().build();
     }
