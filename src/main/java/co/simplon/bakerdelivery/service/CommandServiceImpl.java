@@ -33,6 +33,8 @@ public class CommandServiceImpl implements CommandService {
 
     @Override
     public List<Command> getCommands() {
+
+
         return commandRepository.findAll();
     }
 

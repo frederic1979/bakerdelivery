@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -22,7 +23,7 @@ public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
 
-RestaurantMapper restaurantMapper;
+    RestaurantMapper restaurantMapper;
 
     /*public RestaurantController(RestaurantService restaurantService) {
 
@@ -30,24 +31,27 @@ RestaurantMapper restaurantMapper;
     }*/
 
     @GetMapping
-    public List<Restaurant> getRestaurants() {
-        return restaurantService.getRestaurants();
+    public List<RestaurantDto> getRestaurants() {
+        List<Restaurant> restaurants = restaurantService.getRestaurants();
+        List<RestaurantDto> restaurantDtos = null;
+        for (Restaurant restaurant : restaurants) {
+            RestaurantDto restaurantDto = restaurantMapper.map(restaurant);
+            restaurantDtos.add(restaurantDto);
+        }
+
+        return restaurantDtos;
     }
 
 
     @GetMapping("/{restaurantId}")
     public ResponseEntity<RestaurantDto> getRestaurantById(@PathVariable Long restaurantId) {
         Optional<Restaurant> restaurant = restaurantService.getRestaurantById(restaurantId);
-        System.out.println("le nom du resto est" +restaurantMapper.map(restaurant.get()));
+        System.out.println("le nom du resto est" + restaurantMapper.map(restaurant.get()));
         if (restaurant.isPresent()) {
 
-                        return ResponseEntity.ok(restaurantMapper.map(restaurant.get()));
+            return ResponseEntity.ok(restaurantMapper.map(restaurant.get()));
         } else return ResponseEntity.notFound().build();
     }
-
-
-
-
 
 
     @PostMapping
