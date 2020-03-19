@@ -23,6 +23,7 @@ public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
 
+    @Autowired //Spring créé instance tout seul
     RestaurantMapper restaurantMapper;
 
     /*public RestaurantController(RestaurantService restaurantService) {
@@ -46,10 +47,10 @@ public class RestaurantController {
     @GetMapping("/{restaurantId}")
     public ResponseEntity<RestaurantDto> getRestaurantById(@PathVariable Long restaurantId) {
         Optional<Restaurant> restaurant = restaurantService.getRestaurantById(restaurantId);
-        System.out.println("le nom du resto est" + restaurantMapper.map(restaurant.get()));
+        System.out.println("le nom du resto est" + restaurantMapper.map(restaurant.get()).getName()); //ici on doit préciser qu'on affiche le nom
         if (restaurant.isPresent()) {
 
-            return ResponseEntity.ok(restaurantMapper.map(restaurant.get()));
+            return ResponseEntity.ok(restaurantMapper.map(restaurant.get())); //coté front pas besoin, avec {{}} on recoit un objet restau et on decide d'afficher le nom
         } else return ResponseEntity.notFound().build();
     }
 
