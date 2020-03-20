@@ -1,5 +1,6 @@
 package co.simplon.bakerdelivery.controller;
 
+import co.simplon.bakerdelivery.dto.CommandDto;
 import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.model.Command;
@@ -34,20 +35,20 @@ public class CommandController {
 
 
     @GetMapping
-    public List<Command> getCommands() {
+    public List<CommandDto> getCommands() {
 
-        return commandService.getCommands();
+        return commandMapper.maps(commandService.getCommands());
     }
 
 
 
     @GetMapping("/{commandId}")
-    public ResponseEntity<Command> getCommandById(@PathVariable Long commandId) {
+    public ResponseEntity<CommandDto> getCommandById(@PathVariable Long commandId) {
         Optional<Command> command = commandService.getCommandById(commandId);
         if (command.isPresent()) {
             System.out.println("Commande ID : " +commandMapper.map(commandService.getCommandById(commandId).get()).getId());
             System.out.println("Restaurant ID : " +commandMapper.map(commandService.getCommandById(commandId).get()).getRestaurantId());
-            return ResponseEntity.ok(command.get());
+            return ResponseEntity.ok(commandMapper.map(command.get()));
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -55,9 +56,9 @@ public class CommandController {
     }
 
     @PostMapping
-    public ResponseEntity<Command> createCommand(@RequestBody Command command) {
+    public ResponseEntity<CommandDto> createCommand(@RequestBody Command command) {
         try {
-            return ResponseEntity.ok(commandService.createCommand(command));
+            return ResponseEntity.ok(commandMapper.map(commandService.createCommand(command)));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
