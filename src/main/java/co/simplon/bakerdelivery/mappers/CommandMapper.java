@@ -12,8 +12,11 @@ import java.util.List;
 public interface CommandMapper {
 
     @Mapping(source = "restaurant.id", target = "restaurantId")
-    CommandDto map(Command command);
+    CommandDto toDto(Command command);
 
-    List<CommandDto> maps(List<Command> commands);
+    List<CommandDto> toDto(List<Command> commands);
+
+    @Mapping(source = "restaurantId", target = "restaurant.id")
+    Command toEntity(CommandDto commandDto);
 
 }

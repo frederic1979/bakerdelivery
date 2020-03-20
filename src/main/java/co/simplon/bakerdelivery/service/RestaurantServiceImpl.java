@@ -1,7 +1,9 @@
 package co.simplon.bakerdelivery.service;
 
 import co.simplon.bakerdelivery.controller.RestaurantController;
+import co.simplon.bakerdelivery.dto.RestaurantDto;
 import co.simplon.bakerdelivery.exception.RestaurantNotFoundException;
+import co.simplon.bakerdelivery.mappers.RestaurantMapper;
 import co.simplon.bakerdelivery.model.Restaurant;
 import co.simplon.bakerdelivery.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Autowired
      RestaurantRepository restaurantRepository;
+
+    @Autowired
+    RestaurantMapper restaurantMapper;
 
     //Tu peux utiliser l'annotation de Spring @Autowired quand tu veux qu'une variable de classe (ici ton service) soit instanciée dans le constructeur de ta classe. C'est utile quand tu n'as pas besoin d'autres variables et ça évite d'alourdir le code avec des constructeurs.
     // tu n'as pas besoin de le rendre visible depuis l'exterieur de ta classe, pense à utiliser 'private'.
@@ -38,16 +43,22 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant createRestaurant(Restaurant restaurant) { //à quoi sert le ResponseEntity ici ?
-        return restaurantRepository.save(restaurant);
+    public RestaurantDto createRestaurant(RestaurantDto restaurantDto) { //à quoi sert le ResponseEntity ici ?
+        Restaurant restaurant = restaurantMapper.toEntity(restaurantDto);
+        restaurant = restaurantRepository.save(restaurant);
+        //ou Restaurant restaurant = restaurantRepository.save(mapper.toEntity(dto))
+        return restaurantMapper.toDto(restaurant);
     }
 
 
     @Override
-    public Restaurant updateRestaurant(Restaurant restaurant, Long restaurantId) throws RestaurantNotFoundException {
+    public RestaurantDto updateRestaurant(RestaurantDto restaurantDto, Long restaurantId) throws RestaurantNotFoundException {
         if (restaurantRepository.existsById(restaurantId)) {
+
+            Restaurant restaurant=restaurantMapper.toEntity(restaurantDto);
             restaurant.setId(restaurantId);
-            return restaurantRepository.save(restaurant);
+            restaurant = restaurantRepository.save(restaurant);
+            return restaurantMapper.toDto(restaurant);
         } else
             throw new RestaurantNotFoundException();
 

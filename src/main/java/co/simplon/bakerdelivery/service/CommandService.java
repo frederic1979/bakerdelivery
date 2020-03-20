@@ -1,5 +1,6 @@
 package co.simplon.bakerdelivery.service;
 
+import co.simplon.bakerdelivery.dto.CommandDto;
 import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.model.Command;
 import co.simplon.bakerdelivery.repository.CommandRepository;
@@ -19,9 +20,9 @@ public interface CommandService {
 
     Optional<Command> getCommandById(Long commandId);
 
-    Command createCommand(Command command);
+    CommandDto createCommand(CommandDto command);
 
-    Command updateCommand(Command command, Long commandId) throws CommandNotFoundException;
+    CommandDto updateCommand(CommandDto command, Long commandId) throws CommandNotFoundException;
 
     Boolean deleteCommand(Long commandId);
 

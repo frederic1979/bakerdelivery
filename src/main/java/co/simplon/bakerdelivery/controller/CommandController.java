@@ -1,6 +1,7 @@
 package co.simplon.bakerdelivery.controller;
 
 import co.simplon.bakerdelivery.dto.CommandDto;
+import co.simplon.bakerdelivery.dto.RestaurantDto;
 import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.model.Command;
@@ -10,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +36,7 @@ public class CommandController {
     @GetMapping
     public List<CommandDto> getCommands() {
 
-        return commandMapper.maps(commandService.getCommands());
+        return commandMapper.toDto(commandService.getCommands());
     }
 
 
@@ -46,9 +45,9 @@ public class CommandController {
     public ResponseEntity<CommandDto> getCommandById(@PathVariable Long commandId) {
         Optional<Command> command = commandService.getCommandById(commandId);
         if (command.isPresent()) {
-            System.out.println("Commande ID : " +commandMapper.map(commandService.getCommandById(commandId).get()).getId());
-            System.out.println("Restaurant ID : " +commandMapper.map(commandService.getCommandById(commandId).get()).getRestaurantId());
-            return ResponseEntity.ok(commandMapper.map(command.get()));
+            System.out.println("Commande ID : " +commandMapper.toDto(commandService.getCommandById(commandId).get()).getId());
+            System.out.println("Restaurant ID : " +commandMapper.toDto(commandService.getCommandById(commandId).get()).getRestaurantId());
+            return ResponseEntity.ok(commandMapper.toDto(command.get()));
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -56,21 +55,21 @@ public class CommandController {
     }
 
     @PostMapping
-    public ResponseEntity<CommandDto> createCommand(@RequestBody Command command) {
+    public ResponseEntity<?> createCommand(@RequestBody CommandDto command) {
         try {
-            return ResponseEntity.ok(commandMapper.map(commandService.createCommand(command)));
+            return ResponseEntity.ok(commandService.createCommand(command));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
 
     @PutMapping("/{commandId}")
-    public ResponseEntity<Command> updateCommand(@RequestBody Command command, @PathVariable Long commandId) {
+    public ResponseEntity<CommandDto> updateCommand(@RequestBody CommandDto commandDto, @PathVariable Long commandId) {
 
         try {
 
-            return ResponseEntity.ok(commandService.updateCommand(command, commandId));
+            return ResponseEntity.ok(commandService.updateCommand(commandDto, commandId));
         } catch (CommandNotFoundException e) {
             return ResponseEntity.notFound().build();
         }

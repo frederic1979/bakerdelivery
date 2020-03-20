@@ -1,6 +1,8 @@
 package co.simplon.bakerdelivery.service;
 
+import co.simplon.bakerdelivery.dto.CommandDto;
 import co.simplon.bakerdelivery.exception.CommandNotFoundException;
+import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.model.Command;
 import co.simplon.bakerdelivery.repository.CommandRepository;
 import co.simplon.bakerdelivery.repository.RestaurantRepository;
@@ -22,6 +24,9 @@ public class CommandServiceImpl implements CommandService {
     CommandRepository commandRepository;
     @Autowired
     RestaurantRepository restaurantRepository;
+
+    @Autowired
+    CommandMapper commandMapper;
 
 
     //Constructeur
@@ -47,19 +52,27 @@ public class CommandServiceImpl implements CommandService {
     }
 
     @Override
-    public Command createCommand(Command command) {
-        return commandRepository.save(command);
+    public CommandDto createCommand(CommandDto commandDto) {
+        Command command = commandMapper.toEntity(commandDto);
+        System.out.println("Restau ID de commandDto : "+commandDto.getRestaurantId());
+        System.out.println("command : "+command.getRestaurant().getId());
+        command = commandRepository.save(command);
+        return commandMapper.toDto(command);
     }
 
 
     @Override
-    public Command updateCommand(Command command, Long commandId) throws CommandNotFoundException {
+    public CommandDto updateCommand(CommandDto commandDto, Long commandId) throws CommandNotFoundException {
 
-            if (!commandRepository.existsById(commandId))
-                throw new CommandNotFoundException();
+        if (!commandRepository.existsById(commandId)) {
+            throw new CommandNotFoundException();
+        } else {
+            Command command = commandMapper.toEntity(commandDto);
             command.setId(commandId); //si on ne met pas le set, on créé des news
-            commandRepository.save(command);
-            return command;
+            command = commandRepository.save(command);
+
+            return commandMapper.toDto(command);
+        }
 
     }
 
@@ -88,14 +101,14 @@ public class CommandServiceImpl implements CommandService {
     @Override
     public List<Command> getCommandsByDate(LocalDate date) {
         //LocalDate date = LocalDate.of(2020,02,07);
-               return commandRepository.findCommandsByDate(date);
+        return commandRepository.findCommandsByDate(date);
 
     }
 
 
     @Override
-    public List<Command> getCommandsByDateAndRestaurantId(LocalDate date, Long restaurantId){
-        return commandRepository.findCommandsByDateAndRestaurantId(date,restaurantId);
+    public List<Command> getCommandsByDateAndRestaurantId(LocalDate date, Long restaurantId) {
+        return commandRepository.findCommandsByDateAndRestaurantId(date, restaurantId);
     }
 
 }

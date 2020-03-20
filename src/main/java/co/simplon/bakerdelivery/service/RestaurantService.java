@@ -1,5 +1,6 @@
 package co.simplon.bakerdelivery.service;
 
+import co.simplon.bakerdelivery.dto.RestaurantDto;
 import co.simplon.bakerdelivery.model.Restaurant;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,9 @@ public interface RestaurantService {
 
     Optional<Restaurant> getRestaurantById(Long restaurantId);
 
-    Restaurant createRestaurant(Restaurant restaurant);
+    RestaurantDto createRestaurant(RestaurantDto restaurant);
 
-    Restaurant updateRestaurant(Restaurant restaurant, Long restaurantId);
+    RestaurantDto updateRestaurant(RestaurantDto restaurant, Long restaurantId);
 
     Boolean deleteRestaurant(Long restaurantId);
 

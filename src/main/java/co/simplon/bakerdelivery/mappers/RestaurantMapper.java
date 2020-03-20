@@ -13,10 +13,10 @@ public interface RestaurantMapper {
 
 
     @Mapping(source = "id", target = "id")
-    RestaurantDto map(Restaurant restaurant);
+    RestaurantDto toDto(Restaurant restaurant);
 
-    List<RestaurantDto> maps(List<Restaurant> restaurants);
+    List<RestaurantDto> toDto(List<Restaurant> restaurants);
 
     // transf DTO ---> EntityManager
-    Restaurant unmap(RestaurantDto restaurantDto);
+    Restaurant toEntity(RestaurantDto restaurantDto);
 }

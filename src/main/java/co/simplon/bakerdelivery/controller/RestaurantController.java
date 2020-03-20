@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -35,7 +33,7 @@ public class RestaurantController {
     //ici j'ai déja implementé, grace à Spring, la methode maps pour transf list de restau en liste de restDto
     @GetMapping
     public List<RestaurantDto> getRestaurants() {
-        return restaurantMapper.maps(restaurantService.getRestaurants());
+        return restaurantMapper.toDto(restaurantService.getRestaurants());
     }
 
 
@@ -60,27 +58,27 @@ public class RestaurantController {
         //System.out.println("le nom du resto est" + restaurantMapper.map(restaurant.get()).getName()); //ici on doit préciser qu'on affiche le nom
         if (restaurant.isPresent()) {
 
-            return ResponseEntity.ok(restaurantMapper.map(restaurant.get())); //coté front pas besoin, avec {{}} on recoit un objet restau et on decide d'afficher le nom
+            return ResponseEntity.ok(restaurantMapper.toDto(restaurant.get())); //coté front pas besoin, avec {{}} on recoit un objet restau et on decide d'afficher le nom
         } else return ResponseEntity.notFound().build();
     }
 
 
     @PostMapping
-    public ResponseEntity<RestaurantDto> createRestaurant(@RequestBody Restaurant restaurant) {
+    public ResponseEntity<?> createRestaurant(@RequestBody RestaurantDto restaurantDto) {
         try {
-            return ResponseEntity.ok(restaurantMapper.map(restaurantService.createRestaurant(restaurant)));
+            return ResponseEntity.ok(restaurantService.createRestaurant(restaurantDto));
 
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
 
     @PutMapping("/{restaurantId}")
-    public ResponseEntity<RestaurantDto> updateRestaurant(@RequestBody Restaurant restaurant, @PathVariable Long restaurantId) {
+    public ResponseEntity<RestaurantDto> updateRestaurant(@RequestBody RestaurantDto restaurantDto, @PathVariable Long restaurantId) {
         try {
 
-            return ResponseEntity.ok(restaurantMapper.map(restaurantService.updateRestaurant(restaurant, restaurantId)));
+            return ResponseEntity.ok(restaurantService.updateRestaurant(restaurantDto, restaurantId));
         } catch (RestaurantNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
