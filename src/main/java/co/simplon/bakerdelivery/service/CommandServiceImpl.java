@@ -54,8 +54,8 @@ public class CommandServiceImpl implements CommandService {
     @Override
     public CommandDto createCommand(CommandDto commandDto) {
         Command command = commandMapper.toEntity(commandDto);
-        System.out.println("Restau ID de commandDto : "+commandDto.getRestaurantId());
-        System.out.println("command : "+command.getRestaurant().getId());
+        /*System.out.println("Restau ID de commandDto : "+commandDto.getRestaurantId());
+        System.out.println("command : "+command.getRestaurant().getId());*/
         command = commandRepository.save(command);
         return commandMapper.toDto(command);
     }

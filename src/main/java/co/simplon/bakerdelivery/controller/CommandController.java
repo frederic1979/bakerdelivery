@@ -45,8 +45,8 @@ public class CommandController {
     public ResponseEntity<CommandDto> getCommandById(@PathVariable Long commandId) {
         Optional<Command> command = commandService.getCommandById(commandId);
         if (command.isPresent()) {
-            System.out.println("Commande ID : " +commandMapper.toDto(commandService.getCommandById(commandId).get()).getId());
-            System.out.println("Restaurant ID : " +commandMapper.toDto(commandService.getCommandById(commandId).get()).getRestaurantId());
+            /*System.out.println("Commande ID : " +commandMapper.toDto(commandService.getCommandById(commandId).get()).getId());
+            System.out.println("Restaurant ID : " +commandMapper.toDto(commandService.getCommandById(commandId).get()).getRestaurantId());*/
             return ResponseEntity.ok(commandMapper.toDto(command.get()));
         } else {
             return ResponseEntity.notFound().build();
