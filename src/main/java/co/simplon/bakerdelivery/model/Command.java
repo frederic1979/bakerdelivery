@@ -15,7 +15,7 @@ public class Command {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "command_seq_id")
     private Long id;
 
-    @Column (nullable = false)
+    @Column
     private LocalDate date;
 
     @Column

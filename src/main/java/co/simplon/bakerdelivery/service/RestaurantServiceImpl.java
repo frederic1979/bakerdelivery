@@ -45,7 +45,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public RestaurantDto createRestaurant(RestaurantDto restaurantDto) { //à quoi sert le ResponseEntity ici ?
         Restaurant restaurant = restaurantMapper.toEntity(restaurantDto);
-        restaurant = restaurantRepository.save(restaurant);
+        restaurant = restaurantRepository.save(restaurant);//car le save du repo ne s'applique qu'à des Restaurant
         //ou Restaurant restaurant = restaurantRepository.save(mapper.toEntity(dto))
         return restaurantMapper.toDto(restaurant);
     }
