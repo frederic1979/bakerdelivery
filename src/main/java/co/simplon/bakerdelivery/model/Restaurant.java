@@ -27,7 +27,7 @@ public class Restaurant {
     private String email;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.PERSIST)
     private List<Command> commands = new ArrayList<>();
 
 

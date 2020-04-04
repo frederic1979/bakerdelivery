@@ -1,8 +1,6 @@
 package co.simplon.bakerdelivery.dto;
 
-import co.simplon.bakerdelivery.model.Restaurant;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
 public class CommandDto {
@@ -16,15 +14,7 @@ public class CommandDto {
 
     private Long restaurantId;
 
-    /*private String name;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }*/
 
     public Long getId() {
         return id;
