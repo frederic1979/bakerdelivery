@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Mapper(componentModel = "spring")
@@ -14,6 +15,7 @@ public interface RestaurantMapper {
 
     @Mapping(source = "id", target = "id")
     RestaurantDto toDto(Restaurant restaurant);
+
 
     List<RestaurantDto> toDto(List<Restaurant> restaurants);
 

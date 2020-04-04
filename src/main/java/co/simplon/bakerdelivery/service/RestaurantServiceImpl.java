@@ -2,6 +2,7 @@ package co.simplon.bakerdelivery.service;
 
 import co.simplon.bakerdelivery.controller.RestaurantController;
 import co.simplon.bakerdelivery.dto.RestaurantDto;
+import co.simplon.bakerdelivery.exception.EntityNotFoundException;
 import co.simplon.bakerdelivery.exception.RestaurantNotFoundException;
 import co.simplon.bakerdelivery.mappers.RestaurantMapper;
 import co.simplon.bakerdelivery.model.Restaurant;
@@ -36,11 +37,15 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Optional<Restaurant> getRestaurantById(Long restaurantId) {
+    public RestaurantDto getRestaurantById(Long restaurantId) {
         Optional<Restaurant> restaurant = restaurantRepository.findById(restaurantId);
-        return restaurant;
+       if (restaurant.isPresent()){ /*si le restau est present, on lui envoi un get ci dessous*/
+           Restaurant restaurantFound=restaurant.get();
+        return restaurantMapper.toDto(restaurantFound);}
+       else throw new EntityNotFoundException("The restaurant with ID: " + restaurantId + " cannot be found in DB", "restaurant");
 
     }
+
 
     @Override
     public RestaurantDto createRestaurant(RestaurantDto restaurantDto) { //à quoi sert le ResponseEntity ici ?

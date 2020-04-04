@@ -1,6 +1,7 @@
 package co.simplon.bakerdelivery.controller;
 
 import co.simplon.bakerdelivery.dto.RestaurantDto;
+import co.simplon.bakerdelivery.exception.EntityNotFoundException;
 import co.simplon.bakerdelivery.exception.RestaurantNotFoundException;
 
 import co.simplon.bakerdelivery.mappers.RestaurantMapper;
@@ -54,13 +55,14 @@ public class RestaurantController {
 
     @GetMapping("/{restaurantId}")
     public ResponseEntity<RestaurantDto> getRestaurantById(@PathVariable Long restaurantId) {
-        Optional<Restaurant> restaurant = restaurantService.getRestaurantById(restaurantId);
-        //System.out.println("le nom du resto est" + restaurantMapper.map(restaurant.get()).getName()); //ici on doit préciser qu'on affiche le nom
-        if (restaurant.isPresent()) {
-
-            return ResponseEntity.ok(restaurantMapper.toDto(restaurant.get())); //coté front pas besoin, avec {{}} on recoit un objet restau et on decide d'afficher le nom
-        } else return ResponseEntity.notFound().build();
+        try {
+            RestaurantDto restaurant = restaurantService.getRestaurantById(restaurantId);
+            return ResponseEntity.ok(restaurant);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
+
 
 
     @PostMapping

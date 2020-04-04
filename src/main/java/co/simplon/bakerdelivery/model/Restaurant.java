@@ -1,5 +1,6 @@
 package co.simplon.bakerdelivery.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Value;
 import net.bytebuddy.asm.Advice;
 
@@ -9,7 +10,6 @@ import java.util.List;
 
 
 @Entity
-@Value //Lombock va implementer les getter setter equals hashcode..
 public class Restaurant {
 
     @Id
@@ -26,10 +26,18 @@ public class Restaurant {
     @Column
     private String email;
 
-   /* @OneToMany(mappedBy = "restaurant")
-    private List<Command> commands = new ArrayList<>();*/
+    @JsonIgnore
+    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
+    private List<Command> commands = new ArrayList<>();
 
 
+    public List<Command> getCommands() {
+        return commands;
+    }
+
+    public void setCommands(List<Command> commands) {
+        this.commands = commands;
+    }
 
     public Long getId() {
         return id;

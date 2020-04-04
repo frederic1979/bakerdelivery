@@ -5,6 +5,8 @@ public class RestaurantDto {
 
     private Long id;
     private String name;
+    private String adresse;
+    private String email;
 
 
     public Long getId() {
@@ -23,5 +25,19 @@ public class RestaurantDto {
         this.name = name;
     }
 
+    public String getAdresse() {
+        return adresse;
+    }
 
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

@@ -12,7 +12,7 @@ public interface RestaurantService {
 
     List<Restaurant> getRestaurants();
 
-    Optional<Restaurant> getRestaurantById(Long restaurantId);
+    RestaurantDto getRestaurantById(Long restaurantId);
 
     RestaurantDto createRestaurant(RestaurantDto restaurant);
 
