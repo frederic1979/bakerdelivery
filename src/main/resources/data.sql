@@ -27,8 +27,15 @@ insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval,
 insert into restaurant (id,name,adresse,email) values (restaurant_seq_id.nextval, 'COIN DES COPAINS','','');
 
 
-
-insert into command  values (command_seq_id.nextval, '2020-02-25', 5, 2);
+/*
+insert into command  values (command_seq_id.nextval, '2020-01-01', 5, 2);*/
+/*insert into command  values (command_seq_id.nextval, '2020-01-02', 4, 2);
+insert into command  values (command_seq_id.nextval, '2020-01-03', 2, 2);
+insert into command  values (command_seq_id.nextval, '2020-01-04', 6, 2);
+insert into command  values (command_seq_id.nextval, '2020-01-05', 3, 2);
+insert into command  values (command_seq_id.nextval, '2020-01-06', 1, 2);
+insert into command  values (command_seq_id.nextval, '2020-01-07', 4, 2);
+*/
 insert into command  values (command_seq_id.nextval, '2020-01-03', 2, 7);
 insert into command  values (command_seq_id.nextval, '2020-02-07', 4, 4);
 insert into command  values (command_seq_id.nextval, '2020-01-04', 1, 1);

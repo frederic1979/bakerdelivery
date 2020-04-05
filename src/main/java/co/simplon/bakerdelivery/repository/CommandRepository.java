@@ -18,5 +18,5 @@ public interface CommandRepository extends JpaRepository<Command,Long> {
      //@Query pas nécessaire, juste si je veux implémenter avec du sql ensuite
      List<Command> findCommandsByDate(LocalDate date); // idem spring écrit tt seul la methode
 
-     List<Command> findCommandsByDateAndRestaurantId(LocalDate date, Long restaurantId); //idem spring implémente cette methode findCommandsByDateAndRestaurant
+     List<Command> findCommandsByDateAfterAndDateBefore( Long restaurantId,LocalDate start, LocalDate end); //idem spring implémente cette methode findCommandsByDateAndRestaurant
 }

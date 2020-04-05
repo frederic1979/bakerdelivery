@@ -7,6 +7,7 @@ import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.model.Command;
 import co.simplon.bakerdelivery.service.CommandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,10 +87,15 @@ public class CommandController {
     }
 
     @GetMapping("restaurant/{restaurantId}")
-    public ResponseEntity<List<Command>> getCommandsByRestaurant(@PathVariable Long restaurantId) {
+    public ResponseEntity<List<Command>> getCommandsByRestaurant(
+            @PathVariable Long restaurantId,
+            @RequestParam(value = "start", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
+            @RequestParam(value = "end", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
+        /*ici le requestParam n est pas obligat...false*/
+
         try {
 
-            return ResponseEntity.ok(commandService.getCommandsByRestaurant(restaurantId));
+            return ResponseEntity.ok(commandService.getCommandsByRestaurantIdAndOptionalDate(restaurantId, start, end));
         } catch (Exception e) {
             System.out.println(e);
             return ResponseEntity.badRequest().build();
@@ -109,11 +115,11 @@ public class CommandController {
 
     }
 
-    @GetMapping("date/{date}/{restaurantId}")
+    /*@GetMapping("date/{date}/{restaurantId}")
     public List<Command> getCommandsByDateAndRestaurant(@PathVariable String date, @PathVariable Long restaurantId) {
         LocalDate newDate = LocalDate.parse(date);
         return commandService.getCommandsByDateAndRestaurantId(newDate, restaurantId);
-    }
+    }*/
 
 
 }

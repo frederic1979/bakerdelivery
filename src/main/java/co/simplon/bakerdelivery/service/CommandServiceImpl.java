@@ -101,9 +101,17 @@ public class CommandServiceImpl implements CommandService {
     }
 
 
-    @Override
+   /* @Override
     public List<Command> getCommandsByDateAndRestaurantId(LocalDate date, Long restaurantId) {
         return commandRepository.findCommandsByDateAndRestaurantId(date, restaurantId);
     }
-
+*/
+    @Override
+    public List<Command> getCommandsByRestaurantIdAndOptionalDate(Long restaurantId, LocalDate start, LocalDate end) {
+        if (start == null && end==null) {
+            return this.getCommandsByRestaurant(restaurantId);
+        } else {
+            return commandRepository.findCommandsByDateAfterAndDateBefore(restaurantId, start, end);
+        }
+    }
 }
