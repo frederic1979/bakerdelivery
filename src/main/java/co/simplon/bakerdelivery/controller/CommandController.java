@@ -1,7 +1,6 @@
 package co.simplon.bakerdelivery.controller;
 
 import co.simplon.bakerdelivery.dto.CommandDto;
-import co.simplon.bakerdelivery.dto.RestaurantDto;
 import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.model.Command;
@@ -89,13 +88,14 @@ public class CommandController {
     @GetMapping("restaurant/{restaurantId}")
     public ResponseEntity<List<Command>> getCommandsByRestaurant(
             @PathVariable Long restaurantId,
-            @RequestParam(value = "start", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
-            @RequestParam(value = "end", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
+            @RequestParam(value = "date", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
+            @RequestParam(value = "start", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start,
+            @RequestParam(value = "end", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) {
         /*ici le requestParam n est pas obligat...false*/
 
         try {
 
-            return ResponseEntity.ok(commandService.getCommandsByRestaurantIdAndOptionalDate(restaurantId, start, end));
+            return ResponseEntity.ok(commandService.getCommandsByRestaurantIdAndBetweenTwoDates(restaurantId,date, start, end));
         } catch (Exception e) {
             System.out.println(e);
             return ResponseEntity.badRequest().build();
