@@ -67,7 +67,11 @@ public class CommandController {
 
     @PutMapping("/{commandId}")
     public ResponseEntity<CommandDto> updateCommand(@RequestBody CommandDto commandDto, @PathVariable Long commandId) {
-
+        System.out.println("dans controller de l'update");
+        System.out.println(commandDto.getRestaurantId());
+        System.out.println(commandDto.getQuantity());
+        System.out.println(commandDto.getDate());
+        System.out.println(commandId);
         try {
 
             return ResponseEntity.ok(commandService.updateCommand(commandDto, commandId));
