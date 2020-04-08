@@ -24,28 +24,44 @@ insert into restaurant (id,name,adresse,email) values (restaurant_seq_id.nextval
 insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'LEOPOLD','','');
 insert into restaurant(id,name,adresse,email) values (restaurant_seq_id.nextval, 'BONNE MER','','');
 insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'BISTROT ANETO','','');
-insert into restaurant (id,name,adresse,email) values (restaurant_seq_id.nextval, 'COIN DES COPAINS','','');
 
 
 
-insert into command  values (command_seq_id.nextval, '2020-01-01', 5, 2);
-insert into command  values (command_seq_id.nextval, '2020-01-02', 4, 2);
-insert into command  values (command_seq_id.nextval, '2020-01-03', 2, 2);
-insert into command  values (command_seq_id.nextval, '2020-01-04', 6, 2);
-insert into command  values (command_seq_id.nextval, '2020-01-05', 3, 2);
-insert into command  values (command_seq_id.nextval, '2020-01-06', 1, 2);
-insert into command  values (command_seq_id.nextval, '2020-01-07', 4, 2);
 
-insert into command  values (command_seq_id.nextval, '2020-01-03', 2, 7);
-insert into command  values (command_seq_id.nextval, '2020-02-07', 4, 4);
-insert into command  values (command_seq_id.nextval, '2020-01-04', 1, 1);
-insert into command  values (command_seq_id.nextval, '2020-01-10', 7, 8    );
-insert into command  values (command_seq_id.nextval, '2020-01-12', 4, 6);
-insert into command  values (command_seq_id.nextval, '2020-01-9', null , 3);
-insert into command  values (command_seq_id.nextval, '2019-02-25', 5, 5);
-insert into command  values (command_seq_id.nextval, '2019-01-08', 2, 9);
-insert into command  values (command_seq_id.nextval, '2020-01-25', 4, 2);
-insert into command  values (command_seq_id.nextval, '2020-01-23', 1, 11);
-insert into command  values (command_seq_id.nextval, '2020-02-10', 7, 12);
-insert into command  values (command_seq_id.nextval, '2020-01-02', 4, 5);
-insert into command  values (command_seq_id.nextval, '2020-02-9', null , 13);
+
+insert into command  values (command_seq_id.nextval, '2020-04-06', 'Attente',2, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-07', 'Attente', 5, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-08', 'Attente', 5, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 2, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-10', 'Attente', 1, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-11', 'Attente', 8, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-12', 'Attente', 7, 6);
+
+
+insert into command  values (command_seq_id.nextval, '2020-04-06', 'Attente', 7, 1);
+insert into command  values (command_seq_id.nextval, '2020-04-07', 'Attente', 4, 1);
+insert into command  values (command_seq_id.nextval, '2020-04-08', 'Attente', 2, 1);
+
+insert into command  values (command_seq_id.nextval, '2020-04-06', 'Attente', 6, 2);
+insert into command  values (command_seq_id.nextval, '2020-04-07', 'Attente', 3, 2);
+insert into command  values (command_seq_id.nextval, '2020-04-08', 'Attente', 1, 2);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 4, 2);
+
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 4, 1);
+insert into command  values (command_seq_id.nextval, '2020-04-10', 'Attente', 5, 1);
+insert into command  values (command_seq_id.nextval, '2020-04-11', 'Attente', 4, 1);
+insert into command  values (command_seq_id.nextval, '2020-04-12', 'Attente', 8, 1);
+
+insert into command  values (command_seq_id.nextval, '2020-04-10', 'Attente', 5, 2);
+insert into command  values (command_seq_id.nextval, '2020-04-11', 'Attente', 4, 2);
+insert into command  values (command_seq_id.nextval, '2020-04-12', 'Attente', 2, 2);
+
+
+
+insert into command  values (command_seq_id.nextval, '2020-03-30', 'Attente', 2, 6);
+insert into command  values (command_seq_id.nextval, '2020-03-31', 'Attente', 5, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-01', 'Attente', 5, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-02', 'Attente', 2, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-03', 'Attente', 1, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-04', 'Attente', 8, 6);
+insert into command  values (command_seq_id.nextval, '2020-04-05', 'Attente', 7, 6);

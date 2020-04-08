@@ -40,14 +40,10 @@ public class CommandController {
     }
 
 
-
     @GetMapping("/{commandId}")
     public ResponseEntity<CommandDto> getCommandById(@PathVariable Long commandId) {
         Optional<Command> command = commandService.getCommandById(commandId);
         if (command.isPresent()) {
-            System.out.println("Commande ID : " +commandMapper.toDto(commandService.getCommandById(commandId).get()).getId());
-            System.out.println("Restaurant ID : " +commandMapper.toDto(commandService.getCommandById(commandId).get()).getRestaurantId());
-            //System.out.println("Restaurant Name : " + commandMapper.toDto(commandService.getCommandById(commandId).get()).getName());
             return ResponseEntity.ok(commandMapper.toDto(command.get()));
         } else {
             return ResponseEntity.notFound().build();
@@ -67,11 +63,6 @@ public class CommandController {
 
     @PutMapping("/{commandId}")
     public ResponseEntity<CommandDto> updateCommand(@RequestBody CommandDto commandDto, @PathVariable Long commandId) {
-        System.out.println("dans controller de l'update");
-        System.out.println(commandDto.getRestaurantId());
-        System.out.println(commandDto.getQuantity());
-        System.out.println(commandDto.getDate());
-        System.out.println(commandId);
         try {
 
             return ResponseEntity.ok(commandService.updateCommand(commandDto, commandId));
@@ -90,16 +81,16 @@ public class CommandController {
     }
 
     @GetMapping("restaurant/{restaurantId}")
-    public ResponseEntity<List<Command>> getCommandsByRestaurant(
+    public ResponseEntity<List<Command>> getCommandsByRestaurantAndOptionalDateAndBetweenTwoDates(
             @PathVariable Long restaurantId,
-            @RequestParam(value = "date", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
-            @RequestParam(value = "start", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start,
-            @RequestParam(value = "end", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) {
+            @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+            @RequestParam(value = "start", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
+            @RequestParam(value = "end", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
         /*ici le requestParam n est pas obligat...false*/
 
         try {
 
-            return ResponseEntity.ok(commandService.getCommandsByRestaurantIdAndBetweenTwoDates(restaurantId,date, start, end));
+            return ResponseEntity.ok(commandService.getCommandsByRestaurantIdAndBetweenTwoDates(restaurantId, date, start, end));
         } catch (Exception e) {
             System.out.println(e);
             return ResponseEntity.badRequest().build();
@@ -118,12 +109,6 @@ public class CommandController {
         }
 
     }
-
-    /*@GetMapping("date/{date}/{restaurantId}")
-    public List<Command> getCommandsByDateAndRestaurant(@PathVariable String date, @PathVariable Long restaurantId) {
-        LocalDate newDate = LocalDate.parse(date);
-        return commandService.getCommandsByDateAndRestaurantId(newDate, restaurantId);
-    }*/
 
 
 }

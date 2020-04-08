@@ -21,9 +21,21 @@ public class Command {
     @Column
     private Long quantity;
 
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Etat etat ;
+
     @ManyToOne
     private Restaurant restaurant;
 
+    public Etat getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Etat etat) {
+        this.etat = etat;
+    }
 
     public Long getId() {
         return id;
