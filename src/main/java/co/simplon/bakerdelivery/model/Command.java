@@ -20,7 +20,7 @@ public class Command {
     @Column
     private LocalDate date;
 
-    @Column
+    @Column ()
     private Long quantity;
 
 
@@ -28,7 +28,7 @@ public class Command {
     @Enumerated(EnumType.STRING)
     private Etat etat ;
 
-    @ManyToOne
+    @ManyToOne 
     private Restaurant restaurant;
 
 
