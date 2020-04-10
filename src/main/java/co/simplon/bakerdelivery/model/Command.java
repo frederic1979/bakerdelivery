@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Value
 public class Command {
 
+
+
     @Id
     @SequenceGenerator(name = "command_seq_id", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "command_seq_id")
@@ -28,6 +30,7 @@ public class Command {
 
     @ManyToOne
     private Restaurant restaurant;
+
 
     public Etat getEtat() {
         return etat;

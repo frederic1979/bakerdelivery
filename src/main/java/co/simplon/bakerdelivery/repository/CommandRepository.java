@@ -1,6 +1,8 @@
 package co.simplon.bakerdelivery.repository;
 
+import co.simplon.bakerdelivery.dto.CommandDto;
 import co.simplon.bakerdelivery.model.Command;
+import co.simplon.bakerdelivery.model.Etat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,6 +24,8 @@ public interface CommandRepository extends JpaRepository<Command,Long> {
 
      @Query("select command from Command command join command.restaurant restaurant where restaurant.id = :restaurantId and command.date >= :start and command.date <= :end")
      List<Command> findCommandBetweenDatesAndAndRestaurantId(Long restaurantId, LocalDate start, LocalDate end);
+
+     List<Command> findCommandsByEtatAndDate(Etat etat, LocalDate date);
 
 
 

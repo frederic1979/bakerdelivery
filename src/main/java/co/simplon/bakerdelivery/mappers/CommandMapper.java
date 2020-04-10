@@ -18,7 +18,6 @@ public interface CommandMapper {
     List<CommandDto> toDto(List<Command> commands);
 
     @Mapping(source = "restaurantId", target = "restaurant.id")
-    //@Mapping(source = "name", target = "restaurant.name")
     Command toEntity(CommandDto commandDto);
 
 }

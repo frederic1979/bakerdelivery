@@ -4,12 +4,14 @@ import co.simplon.bakerdelivery.dto.CommandDto;
 import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.model.Command;
+import co.simplon.bakerdelivery.model.Etat;
 import co.simplon.bakerdelivery.service.CommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.spec.PSource;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -35,7 +37,7 @@ public class CommandController {
 
     @GetMapping
     public List<CommandDto> getCommands() {
-
+        System.out.println(commandService.getCommands().get(1).getEtat());
         return commandMapper.toDto(commandService.getCommands());
     }
 
@@ -51,6 +53,15 @@ public class CommandController {
 
     }
 
+    @GetMapping("etat/{etat}")
+    public List<CommandDto> getCommandsByEtat(@PathVariable Etat etat,
+                                              @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+
+        return commandService.getCommandsByEtat(etat,date);
+    }
+
+
+
     @PostMapping
     public ResponseEntity<?> createCommand(@RequestBody CommandDto command) {
         try {
@@ -63,6 +74,7 @@ public class CommandController {
 
     @PutMapping("/{commandId}")
     public ResponseEntity<CommandDto> updateCommand(@RequestBody CommandDto commandDto, @PathVariable Long commandId) {
+
         try {
 
             return ResponseEntity.ok(commandService.updateCommand(commandDto, commandId));

@@ -4,6 +4,7 @@ import co.simplon.bakerdelivery.dto.CommandDto;
 import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.model.Command;
+import co.simplon.bakerdelivery.model.Etat;
 import co.simplon.bakerdelivery.repository.CommandRepository;
 import co.simplon.bakerdelivery.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,11 +102,6 @@ public class CommandServiceImpl implements CommandService {
     }
 
 
-   /* @Override
-    public List<Command> getCommandsByDateAndRestaurantId(LocalDate date, Long restaurantId) {
-        return commandRepository.findCommandsByDateAndRestaurantId(date, restaurantId);
-    }
-*/
     @Override
     public List<Command> getCommandsByRestaurantIdAndBetweenTwoDates(Long restaurantId, LocalDate date, LocalDate start, LocalDate end) {
 
@@ -119,4 +115,12 @@ public class CommandServiceImpl implements CommandService {
         else if (date==null){ return commandRepository.findCommandBetweenDatesAndAndRestaurantId(restaurantId,start,end);}
             else return null;}
     }
+
+@Override
+    public List<CommandDto> getCommandsByEtat(Etat etat, LocalDate date){
+        List<CommandDto> commandDtos = commandMapper.toDto(commandRepository.findCommandsByEtatAndDate(etat, date));
+        return commandDtos;
+}
+
+
 }

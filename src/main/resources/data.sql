@@ -46,6 +46,15 @@ insert into command  values (command_seq_id.nextval, '2020-04-06', 'Attente', 6,
 insert into command  values (command_seq_id.nextval, '2020-04-07', 'Attente', 3, 2);
 insert into command  values (command_seq_id.nextval, '2020-04-08', 'Attente', 1, 2);
 insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 4, 2);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 5, 3);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 2, 4);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 1, 5);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 8, 7);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 8, 8);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 4, 9);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 2, 10);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 1, 11);
+insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 3, 12);
 
 insert into command  values (command_seq_id.nextval, '2020-04-09', 'Attente', 4, 1);
 insert into command  values (command_seq_id.nextval, '2020-04-10', 'Attente', 5, 1);

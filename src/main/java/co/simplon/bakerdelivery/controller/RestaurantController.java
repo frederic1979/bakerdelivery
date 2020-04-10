@@ -65,6 +65,7 @@ public class RestaurantController {
 
 
 
+
     @PostMapping
     public ResponseEntity<?> createRestaurant(@RequestBody RestaurantDto restaurantDto) {
         try {

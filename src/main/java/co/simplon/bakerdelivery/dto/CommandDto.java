@@ -18,6 +18,7 @@ public class CommandDto {
 
     private Long restaurantId;
 
+
     public Etat getEtat() {
         return etat;
     }

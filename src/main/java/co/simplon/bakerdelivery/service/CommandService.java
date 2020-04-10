@@ -3,6 +3,7 @@ package co.simplon.bakerdelivery.service;
 import co.simplon.bakerdelivery.dto.CommandDto;
 import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.model.Command;
+import co.simplon.bakerdelivery.model.Etat;
 import co.simplon.bakerdelivery.repository.CommandRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -34,4 +35,5 @@ public interface CommandService {
 
     List<Command> getCommandsByRestaurantIdAndBetweenTwoDates(Long restaurantId, LocalDate date, LocalDate start, LocalDate end);
 
+    List<CommandDto> getCommandsByEtat(Etat etat, LocalDate date);
 }
