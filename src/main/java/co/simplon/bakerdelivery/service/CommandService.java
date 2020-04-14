@@ -31,9 +31,10 @@ public interface CommandService {
 
     List<Command> getCommandsByDate(LocalDate date);
 
-/*    List<Command> getCommandsByDateAndRestaurantId(LocalDate date, Long restaurantId);*/
 
-    List<Command> getCommandsByRestaurantIdAndBetweenTwoDates(Long restaurantId, LocalDate date, LocalDate start, LocalDate end);
+    CommandDto getCommandByDateAndRestaurantId(LocalDate date, Long restaurantId);
+
+    List<Command> getCommandsByRestaurantIdAndBetweenTwoDates(Long restaurantId, LocalDate start, LocalDate end);
 
     List<CommandDto> getCommandsByEtat(Etat etat, LocalDate date);
 }

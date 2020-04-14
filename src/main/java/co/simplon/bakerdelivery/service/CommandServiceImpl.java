@@ -103,24 +103,28 @@ public class CommandServiceImpl implements CommandService {
 
 
     @Override
-    public List<Command> getCommandsByRestaurantIdAndBetweenTwoDates(Long restaurantId, LocalDate date, LocalDate start, LocalDate end) {
+    public List<Command> getCommandsByRestaurantIdAndBetweenTwoDates(Long restaurantId, LocalDate start, LocalDate end) {
 
-        if (start == null && date == null && end==null) {
+        if (start == null && end == null) {
             return this.getCommandsByRestaurant(restaurantId);
         } else {
-            if (start == null && end==null)
-            {
-
-            return commandRepository.findCommandsByDateAndRestaurantId(date, restaurantId);}
-        else if (date==null){ return commandRepository.findCommandBetweenDatesAndAndRestaurantId(restaurantId,start,end);}
-            else return null;}
+            return commandRepository.findCommandsBetweenDatesAndAndRestaurantId(restaurantId, start, end);
+        }
     }
+
 
 @Override
     public List<CommandDto> getCommandsByEtat(Etat etat, LocalDate date){
         List<CommandDto> commandDtos = commandMapper.toDto(commandRepository.findCommandsByEtatAndDate(etat, date));
         return commandDtos;
 }
+
+    @Override
+    public CommandDto getCommandByDateAndRestaurantId(LocalDate date,Long restaurantId){
+
+        return commandMapper.toDto(commandRepository.findCommandByDateAndRestaurantId(date, restaurantId));
+    }
+
 
 
 }
