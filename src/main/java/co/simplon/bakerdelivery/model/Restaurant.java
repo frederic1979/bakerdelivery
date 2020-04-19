@@ -30,6 +30,9 @@ public class Restaurant {
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.PERSIST)
     private List<Command> commands = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.PERSIST)
+    private List<Matrix> matrixList = new ArrayList<>();
 
     public List<Command> getCommands() {
         return commands;

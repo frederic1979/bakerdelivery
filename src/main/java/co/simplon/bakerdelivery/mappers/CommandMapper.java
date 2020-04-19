@@ -1,6 +1,4 @@
 package co.simplon.bakerdelivery.mappers;
-
-
 import co.simplon.bakerdelivery.dto.CommandDto;
 import co.simplon.bakerdelivery.model.Command;
 import org.mapstruct.Mapper;
