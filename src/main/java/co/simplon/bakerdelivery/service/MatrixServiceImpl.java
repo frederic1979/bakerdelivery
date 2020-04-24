@@ -2,15 +2,13 @@ package co.simplon.bakerdelivery.service;
 
 import co.simplon.bakerdelivery.dto.MatrixDto;
 import co.simplon.bakerdelivery.exception.MatrixNotFoundException;
-import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.mappers.MatrixMapper;
 import co.simplon.bakerdelivery.model.Matrix;
-import co.simplon.bakerdelivery.repository.CommandRepository;
 import co.simplon.bakerdelivery.repository.MatrixRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -57,20 +55,50 @@ public class MatrixServiceImpl implements MatrixService {
     }
 
 
+    @Transactional
     @Override
-    public MatrixDto createMatrix( MatrixDto matrixDto){
+    public List<MatrixDto> createMatrix( List<MatrixDto> matrixDuoDto){
+        System.out.println("dans mon service");
+        List<Matrix> matrixDuo = matrixMapper.toEntity(matrixDuoDto);
+        LocalDate todayDate = LocalDate.now();
 
-        Matrix matrix = matrixMapper.toEntity(matrixDto);
-        matrix =  matrixRepository.save(matrix);
-         return matrixMapper.toDto(matrix);
+        Matrix lastMatrix = matrixDuo.get(0);
+        Matrix newMatrix = matrixDuo.get(1);
+
+        System.out.println("id last : " + lastMatrix.getId());
+        System.out.println("id new : " + newMatrix.getId());
+
+
+        lastMatrix.setEndDate(todayDate);
+        matrixRepository.save(lastMatrix);
+
+        System.out.println("le id de la newMatrix est : " + newMatrix.getId());
+
+        matrixRepository.save(newMatrix);
+
+
+
+
+
+         return matrixMapper.toDto(matrixDuo);
     }
 
     @Override
-    public MatrixDto getMatrixByRestaurantIdAndEndDate(Long restaurantId, LocalDate endDate){
-        System.out.println("dans service restoId : " + restaurantId);
-        System.out.println("dans service date : " + endDate);
-        Matrix matrix = matrixRepository.findMatrixByRestaurantIdAndEndDate(restaurantId,endDate);
+    public MatrixDto getMatrixByRestaurantIdAndEndDate(Long restaurantId, LocalDate endDate) {
+        Matrix matrix = matrixRepository.findMatrixByRestaurantIdAndEndDate(restaurantId, endDate);
         return matrixMapper.toDto(matrix);
+    }
+
+    @Override
+    public MatrixDto getMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(Long restaurantId, LocalDate begin, LocalDate finish){
+        Matrix matrix = matrixRepository.findMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(restaurantId, begin, finish);
+        return matrixMapper.toDto(matrix);
+    }
+
+    @Override
+    public List<MatrixDto> getMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(LocalDate begin, LocalDate finish){
+        List<Matrix> matrixList = matrixRepository.findMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(begin, finish);
+        return matrixMapper.toDto(matrixList);
     }
 
 

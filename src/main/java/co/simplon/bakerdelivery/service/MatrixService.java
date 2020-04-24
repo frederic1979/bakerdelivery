@@ -19,9 +19,13 @@ public interface MatrixService {
 
     MatrixDto getMatrixByRestaurantIdAndEndDate(Long restaurantId, LocalDate date);
 
+    MatrixDto getMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(Long restaurantId, LocalDate begin, LocalDate finish);
+
+    List<MatrixDto> getMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(LocalDate begin, LocalDate finish);
+
     MatrixDto updateMatrix(MatrixDto matrixDto, Long matrixId);
 
-    MatrixDto createMatrix(MatrixDto matrixDto);
+    List<MatrixDto> createMatrix(List<MatrixDto> matrixDuoDto);
 
 
 

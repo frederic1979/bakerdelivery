@@ -8,10 +8,8 @@ import co.simplon.bakerdelivery.service.MatrixService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -54,11 +52,23 @@ public class MatrixController {
 
     @GetMapping("/restaurants/{restaurantId}")
     public MatrixDto getMatrixByRestaurantIdAndEndDate(@PathVariable Long restaurantId,
-                                                       @RequestParam(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
-        System.out.println("end date :" + endDate);
-        return matrixService.getMatrixByRestaurantIdAndEndDate(restaurantId, endDate);
+                                                       @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+                return matrixService.getMatrixByRestaurantIdAndEndDate(restaurantId, endDate);
     }
 
+
+    @GetMapping("/{restaurantId}/between")
+    public MatrixDto getMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(@PathVariable Long restaurantId,
+                                                   @RequestParam(value = "begin", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+            @RequestParam(value = "finish", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate finish) {
+        return matrixService.getMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(restaurantId, begin, finish);
+    }
+
+    @GetMapping("/between")
+    public List<MatrixDto> getMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(@RequestParam(value = "begin", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+                                             @RequestParam(value = "finish", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate finish) {
+        return matrixService.getMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(begin, finish);
+    }
 
 
     @PutMapping("/{matrixId}")
@@ -74,8 +84,9 @@ public class MatrixController {
 
 
     @PostMapping()
-    public MatrixDto createMatrix(@RequestBody MatrixDto matrixDto){
-        return matrixService.createMatrix(matrixDto);
+    public List<MatrixDto> createMatrix(@RequestBody List<MatrixDto> matrixDuoDto){
+        System.out.println("dans mon controller");
+        return matrixService.createMatrix(matrixDuoDto);
     }
 
 }
