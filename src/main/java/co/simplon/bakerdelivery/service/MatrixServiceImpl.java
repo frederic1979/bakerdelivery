@@ -57,30 +57,13 @@ public class MatrixServiceImpl implements MatrixService {
 
     @Transactional
     @Override
-    public List<MatrixDto> createMatrix( List<MatrixDto> matrixDuoDto){
-        System.out.println("dans mon service");
-        List<Matrix> matrixDuo = matrixMapper.toEntity(matrixDuoDto);
+    public MatrixDto createMatrix( MatrixDto matrixDto){
+      
+        Matrix matrix = matrixMapper.toEntity(matrixDto);
         LocalDate todayDate = LocalDate.now();
-
-        Matrix lastMatrix = matrixDuo.get(0);
-        Matrix newMatrix = matrixDuo.get(1);
-
-        System.out.println("id last : " + lastMatrix.getId());
-        System.out.println("id new : " + newMatrix.getId());
-
-
-        lastMatrix.setEndDate(todayDate);
-        matrixRepository.save(lastMatrix);
-
-        System.out.println("le id de la newMatrix est : " + newMatrix.getId());
-
-        matrixRepository.save(newMatrix);
-
-
-
-
-
-         return matrixMapper.toDto(matrixDuo);
+        matrix.setEndDate(todayDate);
+        matrixRepository.save(matrix);
+         return matrixMapper.toDto(matrix);
     }
 
     @Override

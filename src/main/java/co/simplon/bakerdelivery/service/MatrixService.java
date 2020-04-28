@@ -25,7 +25,7 @@ public interface MatrixService {
 
     MatrixDto updateMatrix(MatrixDto matrixDto, Long matrixId);
 
-    List<MatrixDto> createMatrix(List<MatrixDto> matrixDuoDto);
+    MatrixDto createMatrix(MatrixDto matrixDto);
 
 
 

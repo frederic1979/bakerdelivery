@@ -84,9 +84,9 @@ public class MatrixController {
 
 
     @PostMapping()
-    public List<MatrixDto> createMatrix(@RequestBody List<MatrixDto> matrixDuoDto){
+    public MatrixDto createMatrix(@RequestBody MatrixDto matrixDto){
         System.out.println("dans mon controller");
-        return matrixService.createMatrix(matrixDuoDto);
+        return matrixService.createMatrix(matrixDto);
     }
 
 }

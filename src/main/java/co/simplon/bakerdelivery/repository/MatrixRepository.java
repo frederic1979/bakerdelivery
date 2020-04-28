@@ -26,5 +26,9 @@ Matrix findMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(L
 @Query("select matrix from Matrix matrix where matrix.endDate = null and matrix.startDate>= :begin and matrix.startDate<= :finish")
 List<Matrix> findMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(LocalDate begin, LocalDate finish);
 
+/*
+@Query("select matrix from Matrix matrix join matrix.restaurant restaurant where restaurant.id = :restaurantId and matrix.endDate = null and matrix.startDate<= :dateLink ORDER BY matrix.startDate DESC LIMIT 1", nativeQuery = true))
+Matrix findMatrixClosestDateLink(Long restaurantId, LocalDate dateLink);
+*/
 
 }
