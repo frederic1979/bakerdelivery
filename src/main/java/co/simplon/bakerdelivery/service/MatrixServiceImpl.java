@@ -40,6 +40,11 @@ public class MatrixServiceImpl implements MatrixService {
         return matrixMapper.toDto(matrixRepository.findMatrixByRestaurantId(restaurantId));
     }
 
+    @Override
+    public MatrixDto getMatrixByRestaurantIdAndEndDateAndDay(Long restaurantId, LocalDate date, Long day){
+        return matrixMapper.toDto(matrixRepository.findMatrixByRestaurantIdAndEndDateAndDay(restaurantId,date,day));
+    }
+
 
     @Override
     public MatrixDto updateMatrix(MatrixDto matrixDto, Long matrixId) throws MatrixNotFoundException {

@@ -56,6 +56,12 @@ public class MatrixController {
                 return matrixService.getMatrixByRestaurantIdAndEndDate(restaurantId, endDate);
     }
 
+    @GetMapping("/restaurants/{restaurantId}/{day}")
+    public MatrixDto getMatrixByRestaurantIdAndEndDateAndDay(@PathVariable Long restaurantId,
+                                                       @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate, @PathVariable Long day) {
+        return matrixService.getMatrixByRestaurantIdAndEndDateAndDay(restaurantId, endDate, day);
+    }
+
 
     @GetMapping("/{restaurantId}/between")
     public MatrixDto getMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(@PathVariable Long restaurantId,

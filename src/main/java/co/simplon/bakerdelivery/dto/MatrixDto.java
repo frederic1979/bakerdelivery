@@ -1,24 +1,16 @@
 package co.simplon.bakerdelivery.dto;
 
+
 import java.time.LocalDate;
+
 
 public class MatrixDto {
 
     private Long id;
 
-    private Long mondayQuantity;
+    private Long day;
 
-    private Long tuesdayQuantity;
-
-    private Long wednesdayQuantity;
-
-    private Long thursdayQuantity;
-
-    private Long fridayQuantity;
-
-    private Long saturdayQuantity;
-
-    private Long sundayQuantity;
+    private Long quantity;
 
     private LocalDate startDate;
 
@@ -34,60 +26,20 @@ public class MatrixDto {
         this.id = id;
     }
 
-    public Long getMondayQuantity() {
-        return mondayQuantity;
+    public Long getDay() {
+        return day;
     }
 
-    public void setMondayQuantity(Long mondayQuantity) {
-        this.mondayQuantity = mondayQuantity;
+    public void setDay(Long day) {
+        this.day = day;
     }
 
-    public Long getTuesdayQuantity() {
-        return tuesdayQuantity;
+    public Long getQuantity() {
+        return quantity;
     }
 
-    public void setTuesdayQuantity(Long tuesdayQuantity) {
-        this.tuesdayQuantity = tuesdayQuantity;
-    }
-
-    public Long getWednesdayQuantity() {
-        return wednesdayQuantity;
-    }
-
-    public void setWednesdayQuantity(Long wednesdayQuantity) {
-        this.wednesdayQuantity = wednesdayQuantity;
-    }
-
-    public Long getThursdayQuantity() {
-        return thursdayQuantity;
-    }
-
-    public void setThursdayQuantity(Long thursdayQuantity) {
-        this.thursdayQuantity = thursdayQuantity;
-    }
-
-    public Long getFridayQuantity() {
-        return fridayQuantity;
-    }
-
-    public void setFridayQuantity(Long fridayQuantity) {
-        this.fridayQuantity = fridayQuantity;
-    }
-
-    public Long getSaturdayQuantity() {
-        return saturdayQuantity;
-    }
-
-    public void setSaturdayQuantity(Long saturdayQuantity) {
-        this.saturdayQuantity = saturdayQuantity;
-    }
-
-    public Long getSundayQuantity() {
-        return sundayQuantity;
-    }
-
-    public void setSundayQuantity(Long sundayQuantity) {
-        this.sundayQuantity = sundayQuantity;
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 
     public LocalDate getStartDate() {

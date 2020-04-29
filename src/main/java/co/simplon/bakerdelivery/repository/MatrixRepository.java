@@ -14,6 +14,8 @@ public interface MatrixRepository extends JpaRepository<Matrix, Long> {
 
 List<Matrix> findMatrixByRestaurantId(Long restaurantId);
 
+Matrix findMatrixByRestaurantIdAndEndDateAndDay(Long restaurantId, LocalDate date, Long day);
+
 Matrix findMatrixByRestaurantIdAndEndDate(Long restaurantId, LocalDate date);
 
 /*@Query("select matrix from Matrix matrix join matrix.restaurant restaurant where restaurant.id = :restaurantId and matrix.endDate = null and matrix.startDate>= :begin and matrix.startDate<= :finish")

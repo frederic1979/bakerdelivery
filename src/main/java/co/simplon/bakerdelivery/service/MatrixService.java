@@ -17,6 +17,8 @@ public interface MatrixService {
 
     List<MatrixDto> getMatrixListByRestaurantId(Long restaurantId);
 
+    MatrixDto getMatrixByRestaurantIdAndEndDateAndDay(Long restaurantId, LocalDate date, Long day);
+
     MatrixDto getMatrixByRestaurantIdAndEndDate(Long restaurantId, LocalDate date);
 
     MatrixDto getMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(Long restaurantId, LocalDate begin, LocalDate finish);

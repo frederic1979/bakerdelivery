@@ -140,10 +140,18 @@ insert into command  values (command_seq_id.nextval, '2020-04-24', 'Attente', 1,
 insert into command  values (command_seq_id.nextval, '2020-04-25', 'Attente', 0, 4);
 insert into command  values (command_seq_id.nextval, '2020-04-26', 'Attente', 0, 4);
 
-insert into matrix (id,MONDAY_QUANTITY,TUESDAY_QUANTITY,WEDNESDAY_QUANTITY,THURSDAY_QUANTITY,FRIDAY_QUANTITY,SATURDAY_QUANTITY,SUNDAY_QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval, 2,6,5,4,4,5,6,'2020-01-01',6);
-insert into matrix (id,FRIDAY_QUANTITY,MONDAY_QUANTITY,SATURDAY_QUANTITY,SUNDAY_QUANTITY,THURSDAY_QUANTITY,TUESDAY_QUANTITY,WEDNESDAY_QUANTITY,START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval, 2,7,5,4,6,1,9,'2020-02-05',1);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,0, 6,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,1, 2,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,2, 5,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,3, 4,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,4, 6,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,5, 5,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,6, 7,'2020-01-01',6);
+
+
+/*insert into matrix (id,FRIDAY_QUANTITY,MONDAY_QUANTITY,SATURDAY_QUANTITY,SUNDAY_QUANTITY,THURSDAY_QUANTITY,TUESDAY_QUANTITY,WEDNESDAY_QUANTITY,START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval, 2,7,5,4,6,1,9,'2020-02-05',1);
 insert into matrix (id,FRIDAY_QUANTITY,MONDAY_QUANTITY,SATURDAY_QUANTITY,SUNDAY_QUANTITY,THURSDAY_QUANTITY,TUESDAY_QUANTITY,WEDNESDAY_QUANTITY,START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval, 3,5,4,5,5,4,4,'2020-01-05',2);
 insert into matrix (id,FRIDAY_QUANTITY,MONDAY_QUANTITY,SATURDAY_QUANTITY,SUNDAY_QUANTITY,THURSDAY_QUANTITY,TUESDAY_QUANTITY,WEDNESDAY_QUANTITY,START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval, 2,6,6,2,1,2,3,'2020-03-24',3);
 insert into matrix (id,FRIDAY_QUANTITY,MONDAY_QUANTITY,SATURDAY_QUANTITY,SUNDAY_QUANTITY,THURSDAY_QUANTITY,TUESDAY_QUANTITY,WEDNESDAY_QUANTITY,START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval, 3,2,2,3,5,6,4,'2020-04-05',4);
 insert into matrix (id,MONDAY_QUANTITY,TUESDAY_QUANTITY,WEDNESDAY_QUANTITY,THURSDAY_QUANTITY,FRIDAY_QUANTITY,SATURDAY_QUANTITY,SUNDAY_QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval, 2,6,4,1,2,1,3,'2020-02-05',5);
-
+*/

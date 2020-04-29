@@ -3,7 +3,6 @@ package co.simplon.bakerdelivery.model;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-
 @Entity
 public class Matrix {
     @Id
@@ -11,19 +10,9 @@ public class Matrix {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matrix_seq_id")
     private Long id;
 
-    private Long mondayQuantity;
+    private Long day;
 
-    private Long tuesdayQuantity;
-
-    private Long wednesdayQuantity;
-
-    private Long thursdayQuantity;
-
-    private Long fridayQuantity;
-
-    private Long saturdayQuantity;
-
-    private Long sundayQuantity;
+    private Long quantity;
 
     private LocalDate startDate;
 
@@ -31,14 +20,6 @@ public class Matrix {
 
     @ManyToOne
     private Restaurant restaurant;
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
 
     public Long getId() {
         return id;
@@ -48,60 +29,20 @@ public class Matrix {
         this.id = id;
     }
 
-    public Long getMondayQuantity() {
-        return mondayQuantity;
+    public Long getDay() {
+        return day;
     }
 
-    public void setMondayQuantity(Long mondayQuantity) {
-        this.mondayQuantity = mondayQuantity;
+    public void setDay(Long day) {
+        this.day = day;
     }
 
-    public Long getTuesdayQuantity() {
-        return tuesdayQuantity;
+    public Long getQuantity() {
+        return quantity;
     }
 
-    public void setTuesdayQuantity(Long tuesdayQuantity) {
-        this.tuesdayQuantity = tuesdayQuantity;
-    }
-
-    public Long getWednesdayQuantity() {
-        return wednesdayQuantity;
-    }
-
-    public void setWednesdayQuantity(Long wednesdayQuantity) {
-        this.wednesdayQuantity = wednesdayQuantity;
-    }
-
-    public Long getThursdayQuantity() {
-        return thursdayQuantity;
-    }
-
-    public void setThursdayQuantity(Long thursdayQuantity) {
-        this.thursdayQuantity = thursdayQuantity;
-    }
-
-    public Long getFridayQuantity() {
-        return fridayQuantity;
-    }
-
-    public void setFridayQuantity(Long fridayQuantity) {
-        this.fridayQuantity = fridayQuantity;
-    }
-
-    public Long getSaturdayQuantity() {
-        return saturdayQuantity;
-    }
-
-    public void setSaturdayQuantity(Long saturdayQuantity) {
-        this.saturdayQuantity = saturdayQuantity;
-    }
-
-    public Long getSundayQuantity() {
-        return sundayQuantity;
-    }
-
-    public void setSundayQuantity(Long sundayQuantity) {
-        this.sundayQuantity = sundayQuantity;
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 
     public LocalDate getStartDate() {
@@ -118,5 +59,13 @@ public class Matrix {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }
