@@ -29,12 +29,14 @@ public interface CommandService {
 
     List<Command> getCommandsByRestaurant(Long restaurantId);
 
-    List<Command> getCommandsByDate(LocalDate date);
+    /*List<Command> getCommandsByDate(LocalDate date);*/
 
 
-    CommandDto getCommandByDateAndRestaurantId(LocalDate date, Long restaurantId);
+    Command getCommandByRestaurantIdAndDate( Long restaurantId,LocalDate date) throws CommandNotFoundException;
 
     List<Command> getCommandsByRestaurantIdAndBetweenTwoDates(Long restaurantId, LocalDate start, LocalDate end);
 
-    List<CommandDto> getCommandsByEtat(Etat etat, LocalDate date);
+    List<CommandDto> getCommandsByDate(LocalDate date);
+
+    List<CommandDto> getCommandsByEtatAndDate(Etat etat, LocalDate date);
 }

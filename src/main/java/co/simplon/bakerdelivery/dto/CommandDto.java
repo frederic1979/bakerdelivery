@@ -2,6 +2,7 @@ package co.simplon.bakerdelivery.dto;
 
 
 import co.simplon.bakerdelivery.model.Etat;
+import co.simplon.bakerdelivery.model.Restaurant;
 
 import java.time.LocalDate;
 
@@ -17,6 +18,16 @@ public class CommandDto {
     private Etat etat;
 
     private Long restaurantId;
+
+    public CommandDto() {
+    }
+
+    public CommandDto(LocalDate date, Long quantity, Etat etat, Long restaurantId) {
+        this.date = date;
+        this.quantity = quantity;
+        this.etat = etat;
+        this.restaurantId = restaurantId;
+    }
 
 
     public Etat getEtat() {

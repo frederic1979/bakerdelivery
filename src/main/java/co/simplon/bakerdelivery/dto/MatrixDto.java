@@ -8,7 +8,7 @@ public class MatrixDto {
 
     private Long id;
 
-    private Long day;
+    private Integer day;
 
     private Long quantity;
 
@@ -26,11 +26,11 @@ public class MatrixDto {
         this.id = id;
     }
 
-    public Long getDay() {
+    public Integer getDay() {
         return day;
     }
 
-    public void setDay(Long day) {
+    public void setDay(Integer day) {
         this.day = day;
     }
 

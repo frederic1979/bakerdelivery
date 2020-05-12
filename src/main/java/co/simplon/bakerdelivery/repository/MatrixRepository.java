@@ -6,8 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MatrixRepository extends JpaRepository<Matrix, Long> {
@@ -28,6 +31,12 @@ Matrix findMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(L
 @Query("select matrix from Matrix matrix where matrix.endDate = null and matrix.startDate>= :begin and matrix.startDate<= :finish")
 List<Matrix> findMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(LocalDate begin, LocalDate finish);
 
+    // @Query("select m from Matrix m where m.restaurant.id = :restaurantId and m.day = :day and m.startDate > :date order by m.startDate desc")
+    Optional<Matrix> findFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(
+            Long restaurantId,
+            Integer day,
+            LocalDate date
+    );
 /*
 @Query("select matrix from Matrix matrix join matrix.restaurant restaurant where restaurant.id = :restaurantId and matrix.endDate = null and matrix.startDate<= :dateLink ORDER BY matrix.startDate DESC LIMIT 1", nativeQuery = true))
 Matrix findMatrixClosestDateLink(Long restaurantId, LocalDate dateLink);

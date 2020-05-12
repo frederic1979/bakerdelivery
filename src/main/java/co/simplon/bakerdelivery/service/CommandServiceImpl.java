@@ -5,11 +5,15 @@ import co.simplon.bakerdelivery.exception.CommandNotFoundException;
 import co.simplon.bakerdelivery.mappers.CommandMapper;
 import co.simplon.bakerdelivery.model.Command;
 import co.simplon.bakerdelivery.model.Etat;
+import co.simplon.bakerdelivery.model.Matrix;
+import co.simplon.bakerdelivery.model.Restaurant;
 import co.simplon.bakerdelivery.repository.CommandRepository;
+import co.simplon.bakerdelivery.repository.MatrixRepository;
 import co.simplon.bakerdelivery.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,9 @@ public class CommandServiceImpl implements CommandService {
     CommandRepository commandRepository;
     @Autowired
     RestaurantRepository restaurantRepository;
+
+    @Autowired
+    MatrixRepository matrixRepository;
 
     @Autowired
     CommandMapper commandMapper;
@@ -94,10 +101,91 @@ public class CommandServiceImpl implements CommandService {
 
     }
 
+    @Transactional
     @Override
-    public List<Command> getCommandsByDate(LocalDate date) {
-        //LocalDate date = LocalDate.of(2020,02,07);
-        return commandRepository.findCommandsByDate(date);
+    public Command getCommandByRestaurantIdAndDate(Long restaurantId, LocalDate date) {
+        Optional<Command> existingCommand = commandRepository.findCommandByRestaurantIdAndDate(restaurantId, date);
+
+        if (existingCommand.isPresent()) { /*si la commande est presente dans le repo on la renvoi*/
+
+            return existingCommand.get();
+        } else {
+
+            Optional<Matrix> matrix =
+                    matrixRepository.findFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(
+                            restaurantId,
+                            date.getDayOfWeek().getValue() - 1, // Get day of week from date
+                            date
+                    );
+
+            if (matrix.isPresent()) {
+                Command command = new Command(date,
+                        matrix.get().getQuantity(),
+                        Etat.Attente,
+                        restaurantRepository.findById(restaurantId).get());
+                return commandRepository.save(command);
+
+
+            } else {
+                throw new CommandNotFoundException();
+            }
+
+
+        }
+
+    }
+
+
+    @Override
+    public List<CommandDto> getCommandsByDate(LocalDate date) {
+
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+        List<CommandDto> commandsOfTheDay = new ArrayList<>();
+
+        for (Restaurant restaurant : restaurants) {
+            Optional<Command> existingCommand = commandRepository.findCommandByRestaurantIdAndDate(restaurant.getId(), date);
+
+
+            if (existingCommand.isPresent()) {
+                commandsOfTheDay.add(commandMapper.toDto(existingCommand.get()));
+
+            } else {
+
+                Optional<Matrix> matrix =
+                        matrixRepository.findFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(
+                                restaurant.getId(),
+                                date.getDayOfWeek().getValue() - 1, // Get day of week from date
+                                date
+                        );
+
+
+
+                 if (matrix.isPresent()) {
+
+                    /*sinon si la matrix existe on créé la newCommandDto*/
+                    CommandDto commandDto = new CommandDto(date,
+                            matrix.get().getQuantity(),
+                            Etat.Attente,
+                            restaurant.getId());
+                    commandRepository.save(commandMapper.toEntity(commandDto));
+                    commandsOfTheDay.add(commandDto);
+
+                } else {
+                    throw new CommandNotFoundException();
+                }
+            }
+        }
+
+        /*à ce stade, les commandes sont save dans notre table, on peut faire appel à findCommandsByEtatAndDate(etat,date) pour avoir
+        * les commandes avec l'etat demandé*/
+
+        return commandsOfTheDay;
+    }
+
+    @Override
+    public List<CommandDto> getCommandsByEtatAndDate(Etat etat, LocalDate date){
+        List<CommandDto> commandDtoList = commandMapper.toDto(commandRepository.findCommandsByEtatAndDate(etat,date));
+        return commandDtoList;
 
     }
 
@@ -113,17 +201,14 @@ public class CommandServiceImpl implements CommandService {
     }
 
 
-@Override
-    public List<CommandDto> getCommandsByEtat(Etat etat, LocalDate date){
-        List<CommandDto> commandDtos = commandMapper.toDto(commandRepository.findCommandsByEtatAndDate(etat, date));
-        return commandDtos;
-}
 
+/*
     @Override
     public CommandDto getCommandByDateAndRestaurantId(LocalDate date,Long restaurantId){
 
         return commandMapper.toDto(commandRepository.findCommandByDateAndRestaurantId(date, restaurantId));
     }
+*/
 
 
 

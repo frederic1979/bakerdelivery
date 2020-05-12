@@ -11,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.spec.PSource;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -40,7 +39,6 @@ public class CommandController {
         return commandMapper.toDto(commandService.getCommands());
     }
 
-
     @GetMapping("/{commandId}")
     public ResponseEntity<CommandDto> getCommandById(@PathVariable Long commandId) {
         Optional<Command> command = commandService.getCommandById(commandId);
@@ -52,12 +50,20 @@ public class CommandController {
 
     }
 
-    @GetMapping("etat/{etat}")
-    public List<CommandDto> getCommandsByEtat(@PathVariable Etat etat,
-                                              @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
 
-        return commandService.getCommandsByEtat(etat, date);
+    @GetMapping("/{restaurantId}/{dateString}")
+    public ResponseEntity<CommandDto> getCommandByRestaurantIdAndDate(@PathVariable Long restaurantId, @PathVariable String dateString) {
+        LocalDate date = LocalDate.parse(dateString);
+        return ResponseEntity.ok(commandMapper.toDto(commandService.getCommandByRestaurantIdAndDate(restaurantId, date)));
     }
+
+
+/*    @GetMapping("etat/{etat}/{dateString}")
+    public List<CommandDto> getCommandsByEtatAndDate(@PathVariable Etat etat,
+                                              @PathVariable String dateString) {
+LocalDate date = LocalDate.parse(dateString);
+        return commandService.getCommandsByDate(etat, date);
+    }*/
 
     @GetMapping("restaurant/{restaurantId}/datesbetween")
     public ResponseEntity<List<Command>> getCommandsByRestaurantAndOptionalDateAndBetweenTwoDates(
@@ -74,7 +80,7 @@ public class CommandController {
     }
 
 
-    @GetMapping("restaurant/{restaurantId}")
+    /*@GetMapping("restaurant/{restaurantId}")
     public ResponseEntity<CommandDto> getCommandByRestaurantIdAndDate(
             @PathVariable Long restaurantId,
             @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
@@ -86,19 +92,39 @@ public class CommandController {
             return ResponseEntity.badRequest().build();
         }
     }
+*/
 
 
+
+    @GetMapping("date/{stringDate}")
+    public List<CommandDto> getCommandsByDate(@PathVariable String stringDate) {
+        LocalDate date = LocalDate.parse(stringDate);
+        return commandService.getCommandsByDate(date);
+
+    }
+
+
+    @GetMapping("etat/{etat}/{stringDate}")
+    public List<CommandDto> getCommandsByDate(@PathVariable Etat etat, @PathVariable String stringDate) {
+        LocalDate date = LocalDate.parse(stringDate);
+        return commandService.getCommandsByEtatAndDate(etat,date);
+
+    }
+
+
+/*
     @GetMapping("date/{date}")
-    public ResponseEntity<?> getCommandsByDate(@PathVariable String date) {
+    public List<CommandDto> getCommandsByDate(@PathVariable String stringDate) {
         try {
-            LocalDate newDate = LocalDate.parse(date);
-            return ResponseEntity.ok(commandService.getCommandsByDate(newDate));
+            LocalDate date = LocalDate.parse(stringDate);
+            return ResponseEntity.ok(commandService.getCommandsByDate(date));
         }//on convertit notre string en LocalDate
         catch (DateTimeParseException e) {
             return ResponseEntity.badRequest().body("pb date..");
         }
 
-    }
+    }*/
+
 
 
     @PostMapping

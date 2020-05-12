@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CommandRepository extends JpaRepository<Command,Long> {
@@ -20,8 +21,7 @@ public interface CommandRepository extends JpaRepository<Command,Long> {
      //@Query pas nécessaire, juste si je veux implémenter avec du sql ensuite
      List<Command> findCommandsByDate(LocalDate date); // idem spring écrit tt seul la methode
 
-
-     Command findCommandByDateAndRestaurantId(LocalDate date, Long restaurantId); //idem spring implémente cette methode findCommandsByDateAndRestaurant
+     Optional<Command> findCommandByRestaurantIdAndDateAndEtat(Long restaurantId, LocalDate date, Etat etat);
 
 
      @Query("select command from Command command join command.restaurant restaurant where restaurant.id = :restaurantId and command.date >= :start and command.date <= :end")
@@ -29,6 +29,12 @@ public interface CommandRepository extends JpaRepository<Command,Long> {
 
      List<Command> findCommandsByEtatAndDate(Etat etat, LocalDate date);
 
+     Optional<Command> findCommandByRestaurantIdAndDate( Long restaurantId, LocalDate date);
 
 
-}
+
+     }
+
+
+
+

@@ -10,7 +10,7 @@ public class Matrix {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matrix_seq_id")
     private Long id;
 
-    private Long day;
+    private Integer day;
 
     private Long quantity;
 
@@ -29,11 +29,11 @@ public class Matrix {
         this.id = id;
     }
 
-    public Long getDay() {
+    public Integer getDay() {
         return day;
     }
 
-    public void setDay(Long day) {
+    public void setDay(Integer day) {
         this.day = day;
     }
 

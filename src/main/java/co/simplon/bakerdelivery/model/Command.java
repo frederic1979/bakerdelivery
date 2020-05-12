@@ -1,6 +1,7 @@
 package co.simplon.bakerdelivery.model;
 
 import lombok.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -30,6 +31,17 @@ public class Command {
 
     @ManyToOne 
     private Restaurant restaurant;
+
+    public Command() {
+    }
+
+
+    public Command(LocalDate date, Long quantity, Etat etat, Restaurant restaurant) {
+        this.date = date;
+        this.quantity = quantity;
+        this.etat = etat;
+        this.restaurant = restaurant;
+    }
 
 
     public Etat getEtat() {
