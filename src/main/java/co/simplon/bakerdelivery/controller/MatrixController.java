@@ -32,6 +32,8 @@ public class MatrixController {
 
     }
 
+
+
     @GetMapping("/{matrixId}")
     public ResponseEntity<MatrixDto> getMatrixById(@PathVariable Long matrixId) {
         Optional<Matrix> matrix = matrixService.getMatrixById(matrixId);
@@ -43,10 +45,19 @@ public class MatrixController {
 
     }
 
+
+
     @GetMapping("restaurant/{restaurantId}")
     public List<MatrixDto> getMatrixListByRestaurantId(@PathVariable Long restaurantId) {
         System.out.println("dans le controller");
         return matrixService.getMatrixListByRestaurantId(restaurantId);
+
+    }
+
+    @GetMapping("restaurants/{restaurantId}/{stringDate}")
+    public List<MatrixDto> getMatrixListByRestaurantIdAndStartDateBefore(@PathVariable Long restaurantId,@PathVariable String stringDate) {
+        LocalDate date = LocalDate.parse(stringDate);
+        return matrixService.getMatrixListByRestaurantIdAndStartDateBefore(restaurantId, date);
 
     }
 
@@ -56,25 +67,20 @@ public class MatrixController {
                 return matrixService.getMatrixByRestaurantIdAndEndDate(restaurantId, endDate);
     }
 
-    @GetMapping("/restaurants/{restaurantId}/{day}")
-    public MatrixDto getMatrixByRestaurantIdAndEndDateAndDay(@PathVariable Long restaurantId,
-                                                       @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate, @PathVariable Long day) {
-        return matrixService.getMatrixByRestaurantIdAndEndDateAndDay(restaurantId, endDate, day);
+
+
+    @GetMapping("/restaurants/{restaurantId}/{day}/{stringDate}")
+    public ResponseEntity<MatrixDto> getFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(@PathVariable Long restaurantId,
+                                                             @PathVariable String stringDate, @PathVariable Integer day) {
+        LocalDate date = LocalDate.parse(stringDate);
+        try {return ResponseEntity.ok(matrixService.getFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(restaurantId, day, date));
+
+        }
+        catch (MatrixNotFoundException e){return ResponseEntity.notFound().build();}
+
     }
 
 
-    @GetMapping("/{restaurantId}/between")
-    public MatrixDto getMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(@PathVariable Long restaurantId,
-                                                   @RequestParam(value = "begin", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
-            @RequestParam(value = "finish", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate finish) {
-        return matrixService.getMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(restaurantId, begin, finish);
-    }
-
-    @GetMapping("/between")
-    public List<MatrixDto> getMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(@RequestParam(value = "begin", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
-                                             @RequestParam(value = "finish", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate finish) {
-        return matrixService.getMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(begin, finish);
-    }
 
 
     @PutMapping("/{matrixId}")

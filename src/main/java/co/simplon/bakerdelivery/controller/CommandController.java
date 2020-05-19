@@ -39,6 +39,7 @@ public class CommandController {
         return commandMapper.toDto(commandService.getCommands());
     }
 
+
     @GetMapping("/{commandId}")
     public ResponseEntity<CommandDto> getCommandById(@PathVariable Long commandId) {
         Optional<Command> command = commandService.getCommandById(commandId);
@@ -58,12 +59,7 @@ public class CommandController {
     }
 
 
-/*    @GetMapping("etat/{etat}/{dateString}")
-    public List<CommandDto> getCommandsByEtatAndDate(@PathVariable Etat etat,
-                                              @PathVariable String dateString) {
-LocalDate date = LocalDate.parse(dateString);
-        return commandService.getCommandsByDate(etat, date);
-    }*/
+
 
     @GetMapping("restaurant/{restaurantId}/datesbetween")
     public ResponseEntity<List<Command>> getCommandsByRestaurantAndOptionalDateAndBetweenTwoDates(
@@ -80,20 +76,6 @@ LocalDate date = LocalDate.parse(dateString);
     }
 
 
-    /*@GetMapping("restaurant/{restaurantId}")
-    public ResponseEntity<CommandDto> getCommandByRestaurantIdAndDate(
-            @PathVariable Long restaurantId,
-            @RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-
-
-        try {
-            return ResponseEntity.ok(commandService.getCommandByDateAndRestaurantId(date, restaurantId));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-*/
-
 
 
     @GetMapping("date/{stringDate}")
@@ -104,26 +86,13 @@ LocalDate date = LocalDate.parse(dateString);
     }
 
 
+
     @GetMapping("etat/{etat}/{stringDate}")
     public List<CommandDto> getCommandsByDate(@PathVariable Etat etat, @PathVariable String stringDate) {
         LocalDate date = LocalDate.parse(stringDate);
         return commandService.getCommandsByEtatAndDate(etat,date);
 
     }
-
-
-/*
-    @GetMapping("date/{date}")
-    public List<CommandDto> getCommandsByDate(@PathVariable String stringDate) {
-        try {
-            LocalDate date = LocalDate.parse(stringDate);
-            return ResponseEntity.ok(commandService.getCommandsByDate(date));
-        }//on convertit notre string en LocalDate
-        catch (DateTimeParseException e) {
-            return ResponseEntity.badRequest().body("pb date..");
-        }
-
-    }*/
 
 
 
@@ -147,6 +116,8 @@ LocalDate date = LocalDate.parse(dateString);
             return ResponseEntity.notFound().build();
         }
     }
+
+
 
     @DeleteMapping("/{commandId}")
     public ResponseEntity<Command> deleteCommand(@PathVariable Long commandId) {

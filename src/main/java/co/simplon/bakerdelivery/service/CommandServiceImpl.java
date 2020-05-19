@@ -176,8 +176,6 @@ public class CommandServiceImpl implements CommandService {
             }
         }
 
-        /*à ce stade, les commandes sont save dans notre table, on peut faire appel à findCommandsByEtatAndDate(etat,date) pour avoir
-        * les commandes avec l'etat demandé*/
 
         return commandsOfTheDay;
     }

@@ -29,8 +29,6 @@ public interface CommandService {
 
     List<Command> getCommandsByRestaurant(Long restaurantId);
 
-    /*List<Command> getCommandsByDate(LocalDate date);*/
-
 
     Command getCommandByRestaurantIdAndDate( Long restaurantId,LocalDate date) throws CommandNotFoundException;
 

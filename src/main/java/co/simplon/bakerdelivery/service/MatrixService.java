@@ -17,13 +17,14 @@ public interface MatrixService {
 
     List<MatrixDto> getMatrixListByRestaurantId(Long restaurantId);
 
-    MatrixDto getMatrixByRestaurantIdAndEndDateAndDay(Long restaurantId, LocalDate date, Long day);
+    List<MatrixDto> getMatrixListByRestaurantIdAndStartDateBefore(Long restaurantId, LocalDate date);
+
+    MatrixDto getFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(Long restaurantId, Integer day, LocalDate date);
 
     MatrixDto getMatrixByRestaurantIdAndEndDate(Long restaurantId, LocalDate date);
 
-    MatrixDto getMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(Long restaurantId, LocalDate begin, LocalDate finish);
+    MatrixDto getMatrixByRestaurantIdAndDayAndStartDateEqualsDate(Long restaurantId, Integer day, LocalDate date);
 
-    List<MatrixDto> getMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(LocalDate begin, LocalDate finish);
 
     MatrixDto updateMatrix(MatrixDto matrixDto, Long matrixId);
 

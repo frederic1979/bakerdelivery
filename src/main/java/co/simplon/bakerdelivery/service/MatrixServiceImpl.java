@@ -40,9 +40,30 @@ public class MatrixServiceImpl implements MatrixService {
         return matrixMapper.toDto(matrixRepository.findMatrixByRestaurantId(restaurantId));
     }
 
+
     @Override
-    public MatrixDto getMatrixByRestaurantIdAndEndDateAndDay(Long restaurantId, LocalDate date, Long day){
-        return matrixMapper.toDto(matrixRepository.findMatrixByRestaurantIdAndEndDateAndDay(restaurantId,date,day));
+    public List<MatrixDto> getMatrixListByRestaurantIdAndStartDateBefore(Long restaurantId, LocalDate date){
+
+        return matrixMapper.toDto(matrixRepository.findFirstMatrixByRestaurantIdAndStartDateIsBeforeOrderByStartDateDesc(restaurantId,date));
+    }
+
+
+
+    @Override
+    public MatrixDto getMatrixByRestaurantIdAndDayAndStartDateEqualsDate(Long restaurantId, Integer day, LocalDate date){
+        Optional<Matrix> existingMatrix = matrixRepository.findMatrixByRestaurantIdAndDayAndStartDateEqualsDate(restaurantId,day,date);
+        if (existingMatrix.isPresent())
+        {return matrixMapper.toDto(existingMatrix.get());}
+        else throw new MatrixNotFoundException();
+    }
+
+
+    @Override
+    public MatrixDto getFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(Long restaurantId, Integer day, LocalDate date) {
+        Optional<Matrix> existingMatrixList = matrixRepository.findFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(restaurantId,day, date);
+        if (existingMatrixList.isPresent()) {
+            return matrixMapper.toDto(existingMatrixList.get());
+        } else throw new MatrixNotFoundException();
     }
 
 
@@ -65,8 +86,8 @@ public class MatrixServiceImpl implements MatrixService {
     public MatrixDto createMatrix( MatrixDto matrixDto){
       
         Matrix matrix = matrixMapper.toEntity(matrixDto);
-        LocalDate todayDate = LocalDate.now();
-        matrix.setEndDate(todayDate);
+
+
         matrixRepository.save(matrix);
          return matrixMapper.toDto(matrix);
     }
@@ -77,17 +98,7 @@ public class MatrixServiceImpl implements MatrixService {
         return matrixMapper.toDto(matrix);
     }
 
-    @Override
-    public MatrixDto getMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(Long restaurantId, LocalDate begin, LocalDate finish){
-        Matrix matrix = matrixRepository.findMatrixByRestaurantIdAndEndDateNullAndStartDateBetweenBeginAndFinish(restaurantId, begin, finish);
-        return matrixMapper.toDto(matrix);
-    }
 
-    @Override
-    public List<MatrixDto> getMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(LocalDate begin, LocalDate finish){
-        List<Matrix> matrixList = matrixRepository.findMatrixByEndDateNullAndStartDateBetweenBeginAndFinish(begin, finish);
-        return matrixMapper.toDto(matrixList);
-    }
 
 
 }

@@ -10,9 +10,7 @@ import co.simplon.bakerdelivery.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -65,7 +63,6 @@ public class RestaurantController {
 
 
 
-
     @PostMapping
     public ResponseEntity<?> createRestaurant(@RequestBody RestaurantDto restaurantDto) {
         try {
@@ -77,6 +74,7 @@ public class RestaurantController {
     }
 
 
+
     @PutMapping("/{restaurantId}")
     public ResponseEntity<RestaurantDto> updateRestaurant(@RequestBody RestaurantDto restaurantDto, @PathVariable Long restaurantId) {
         try {
@@ -86,6 +84,8 @@ public class RestaurantController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 
     @DeleteMapping("/{restaurantId}")
     public ResponseEntity<RestaurantDto> deleteRestaurant(@PathVariable Long restaurantId) {

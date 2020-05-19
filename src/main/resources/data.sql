@@ -90,13 +90,13 @@ insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_s
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,6, 0,'2020-01-01',5);
 
 
-insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,0, 0,'2020-01-01',6);
-insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,1, 0,'2020-01-01',6);
-insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,2, 0,'2020-01-01',6);
-insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,3, 0,'2020-01-01',6);
-insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,4, 0,'2020-01-01',6);
-insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,5, 0,'2020-01-01',6);
-insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,6, 0,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,0, 3,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,1, 2,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,2, 5,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,3, 7,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,4, 5,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,5, 4,'2020-01-01',6);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,6, 3,'2020-01-01',6);
 
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,0, 0,'2020-01-01',7);
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,1, 0,'2020-01-01',7);
