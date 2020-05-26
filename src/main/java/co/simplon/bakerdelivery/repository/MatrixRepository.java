@@ -25,10 +25,16 @@ Matrix findMatrixByRestaurantIdAndEndDateAndDay(Long restaurantId, LocalDate dat
 Matrix findMatrixByRestaurantIdAndEndDate(Long restaurantId, LocalDate date);
 
 
+    List<Matrix> findAllMatrixByRestaurantIdAndStartDateIsBeforeOrderByStartDateDesc(
+            Long restaurantId,
+             LocalDate date
+    );
+
+    Optional<Matrix> findMatrixByRestaurantIdAndDayAndStartDate(Long restaurantId, Integer day, LocalDate date);
 
 
-    // @Query("select m from Matrix m where m.restaurant.id = :restaurantId and m.day = :day and m.startDate > :date order by m.startDate desc")
-    Optional<Matrix> findFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(
+    // @Query("select m from Matrix m where m.restaurant.id = :restaurantId and m.day = :day and m.startDate < :date order by m.startDate desc")
+    Optional<Matrix> findFirstMatrixByRestaurantIdAndDayAndStartDateLessThanEqualOrderByStartDateDesc(
             Long restaurantId,
             Integer day,
             LocalDate date

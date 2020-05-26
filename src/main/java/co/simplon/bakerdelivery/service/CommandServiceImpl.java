@@ -112,7 +112,7 @@ public class CommandServiceImpl implements CommandService {
         } else {
 
             Optional<Matrix> matrix =
-                    matrixRepository.findFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(
+                    matrixRepository.findFirstMatrixByRestaurantIdAndDayAndStartDateLessThanEqualOrderByStartDateDesc(
                             restaurantId,
                             date.getDayOfWeek().getValue() - 1, // Get day of week from date
                             date
@@ -152,7 +152,7 @@ public class CommandServiceImpl implements CommandService {
             } else {
 
                 Optional<Matrix> matrix =
-                        matrixRepository.findFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(
+                        matrixRepository.findFirstMatrixByRestaurantIdAndDayAndStartDateLessThanEqualOrderByStartDateDesc(
                                 restaurant.getId(),
                                 date.getDayOfWeek().getValue() - 1, // Get day of week from date
                                 date

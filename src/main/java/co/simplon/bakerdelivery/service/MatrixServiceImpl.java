@@ -60,7 +60,7 @@ public class MatrixServiceImpl implements MatrixService {
 
     @Override
     public MatrixDto getFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(Long restaurantId, Integer day, LocalDate date) {
-        Optional<Matrix> existingMatrixList = matrixRepository.findFirstMatrixByRestaurantIdAndDayAndStartDateIsBeforeOrderByStartDateDesc(restaurantId,day, date);
+        Optional<Matrix> existingMatrixList = matrixRepository.findFirstMatrixByRestaurantIdAndDayAndStartDateLessThanEqualOrderByStartDateDesc(restaurantId,day, date);
         if (existingMatrixList.isPresent()) {
             return matrixMapper.toDto(existingMatrixList.get());
         } else throw new MatrixNotFoundException();
@@ -81,15 +81,28 @@ public class MatrixServiceImpl implements MatrixService {
     }
 
 
+    /*on ne va creer une matrix seulement si la matrix avec RestauId & Day & StartDate n'existe pas déja sinon on update*/
     @Transactional
     @Override
     public MatrixDto createMatrix( MatrixDto matrixDto){
       
         Matrix matrix = matrixMapper.toEntity(matrixDto);
+        System.out.println(matrixDto.getDay());
+        System.out.println(matrixDto.getStartDate());
+        System.out.println(matrixDto.getRestaurantId());
+        Optional<Matrix> existingMatrix = matrixRepository.findMatrixByRestaurantIdAndDayAndStartDate(matrixDto.getRestaurantId(),matrixDto.getDay(),matrixDto.getStartDate());
+        if (existingMatrix.isPresent())
+        {
 
-
-        matrixRepository.save(matrix);
-         return matrixMapper.toDto(matrix);
+            Matrix mat = existingMatrix.get();
+            matrix.setId(mat.getId());
+            matrix = matrixRepository.save(matrix);
+        }
+        else {
+            matrixRepository.save(matrix);
+            System.out.println("elle existe pas");}
+        /*matrixRepository.save(matrix);*/
+         return null /*matrixMapper.toDto(matrix)*/;
     }
 
     @Override

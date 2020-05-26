@@ -48,7 +48,7 @@ insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval,
 insert into restaurant (id,name,adresse,email)values (restaurant_seq_id.nextval, 'CAFE DE LA PLACE','5 rue de la paix','f.buono@wanadoo.com');
 
 
-insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,0, 0,'2020-01-01',1);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,0, 3,'2020-01-01',1);
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,1, 0,'2020-01-01',1);
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,2, 0,'2020-01-01',1);
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,3, 0,'2020-01-01',1);

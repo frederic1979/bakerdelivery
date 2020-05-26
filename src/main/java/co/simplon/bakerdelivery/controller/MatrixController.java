@@ -49,8 +49,7 @@ public class MatrixController {
 
     @GetMapping("restaurant/{restaurantId}")
     public List<MatrixDto> getMatrixListByRestaurantId(@PathVariable Long restaurantId) {
-        System.out.println("dans le controller");
-        return matrixService.getMatrixListByRestaurantId(restaurantId);
+         return matrixService.getMatrixListByRestaurantId(restaurantId);
 
     }
 
