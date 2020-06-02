@@ -37,4 +37,7 @@ public interface CommandService {
     List<CommandDto> getCommandsByDate(LocalDate date);
 
     List<CommandDto> getCommandsByEtatAndDate(Etat etat, LocalDate date);
+
+
+    List<CommandDto> getCommandsBetweenTwoDates( LocalDate start, LocalDate end);
 }

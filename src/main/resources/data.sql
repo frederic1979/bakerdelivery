@@ -54,7 +54,7 @@ insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_s
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,3, 0,'2020-01-01',1);
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,4, 0,'2020-01-01',1);
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,5, 0,'2020-01-01',1);
-insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,6, 0,'2020-01-01',1);
+insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,6, 8,'2020-01-01',1);
 
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,0, 0,'2020-01-01',2);
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,1, 0,'2020-01-01',2);
@@ -365,11 +365,58 @@ insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_s
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,4, 0,'2020-01-01',44);
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,5, 0,'2020-01-01',44);
 insert into matrix (id,DAY, QUANTITY, START_DATE,RESTAURANT_ID )values (matrix_seq_id.nextval,6, 0,'2020-01-01',44);
-/*
 
+insert into week (id,start,end)values (1,'2020-01-01','2020-01-05');
+insert into week (id,start,end)values (2,'2020-01-06','2020-01-12');
+insert into week (id,start,end)values (3,'2020-01-13','2020-01-19');
+insert into week (id,start,end)values (4,'2020-01-20','2020-01-26');
+insert into week (id,start,end)values (5,'2020-01-27','2020-02-02');
+insert into week (id,start,end)values (6,'2020-02-03','2020-02-09');
+insert into week (id,start,end)values (7,'2020-02-10','2020-02-16');
+insert into week (id,start,end)values (8,'2020-02-17','2020-02-23');
+insert into week (id,start,end)values (9,'2020-02-24','2020-03-01');
+insert into week (id,start,end)values (10,'2020-03-02','2020-03-08');
+insert into week (id,start,end)values (11,'2020-03-09','2020-03-15');
+insert into week (id,start,end)values (12,'2020-03-16','2020-03-22');
+insert into week (id,start,end)values (13,'2020-03-23','2020-03-29');
+insert into week (id,start,end)values (14,'2020-03-30','2020-04-05');
+insert into week (id,start,end)values (15,'2020-04-06','2020-04-12');
+insert into week (id,start,end)values (16,'2020-04-13','2020-04-19');
+insert into week (id,start,end)values (17,'2020-04-20','2020-04-26');
+insert into week (id,start,end)values (18,'2020-04-27','2020-05-03');
+insert into week (id,start,end)values (19,'2020-05-04','2020-05-10');
+insert into week (id,start,end)values (20,'2020-05-11','2020-05-17');
+insert into week (id,start,end)values (21,'2020-05-18','2020-05-24');
+insert into week (id,start,end)values (22,'2020-05-25','2020-05-31');
+insert into week (id,start,end)values (23,'2020-06-01','2020-06-07');
+insert into week (id,start,end)values (24,'2020-06-08','2020-06-14');
+insert into week (id,start,end)values (25,'2020-06-15','2020-06-21');
+insert into week (id,start,end)values (26,'2020-06-22','2020-06-28');
+insert into week (id,start,end)values (27,'2020-06-29','2020-07-05');
+insert into week (id,start,end)values (28,'2020-07-06','2020-07-12');
+insert into week (id,start,end)values (29,'2020-07-13','2020-07-19');
+insert into week (id,start,end)values (30,'2020-07-20','2020-07-26');
+insert into week (id,start,end)values (31,'2020-07-27','2020-08-02');
+insert into week (id,start,end)values (32,'2020-08-03','2020-08-09');
+insert into week (id,start,end)values (33,'2020-08-10','2020-08-16');
+insert into week (id,start,end)values (34,'2020-08-17','2020-08-23');
+insert into week (id,start,end)values (35,'2020-08-24','2020-08-30');
+insert into week (id,start,end)values (36,'2020-08-31','2020-09-06');
+insert into week (id,start,end)values (37,'2020-09-07','2020-09-13');
+insert into week (id,start,end)values (38,'2020-09-14','2020-09-20');
+insert into week (id,start,end)values (39,'2020-09-21','2020-09-27');
+insert into week (id,start,end)values (40,'2020-09-28','2020-10-04');
+insert into week (id,start,end)values (41,'2020-10-05','2020-10-11');
+insert into week (id,start,end)values (42,'2020-10-12','2020-10-18');
+insert into week (id,start,end)values (43,'2020-10-19','2020-10-25');
+insert into week (id,start,end)values (44,'2020-10-26','2020-11-01');
+insert into week (id,start,end)values (45,'2020-11-02','2020-11-08');
+insert into week (id,start,end)values (46,'2020-11-09','2020-11-15');
+insert into week (id,start,end)values (47,'2020-11-16','2020-11-22');
+insert into week (id,start,end)values (48,'2020-11-23','2020-11-29');
+insert into week (id,start,end)values (49,'2020-11-30','2020-12-06');
+insert into week (id,start,end)values (50,'2020-12-07','2020-12-13');
+insert into week (id,start,end)values (51,'2020-12-14','2020-12-20');
+insert into week (id,start,end)values (52,'2020-12-21','2020-12-27');
+insert into week (id,start,end)values (53,'2020-12-28','2020-12-31');
 
-
-
-
-
-*/

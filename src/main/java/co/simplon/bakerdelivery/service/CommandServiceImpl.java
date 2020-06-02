@@ -140,14 +140,14 @@ public class CommandServiceImpl implements CommandService {
     public List<CommandDto> getCommandsByDate(LocalDate date) {
 
         List<Restaurant> restaurants = restaurantRepository.findAll();
-        List<CommandDto> commandsOfTheDay = new ArrayList<>();
+        List<CommandDto> commandsDtoOfTheDay = new ArrayList<>();
 
         for (Restaurant restaurant : restaurants) {
             Optional<Command> existingCommand = commandRepository.findCommandByRestaurantIdAndDate(restaurant.getId(), date);
 
 
             if (existingCommand.isPresent()) {
-                commandsOfTheDay.add(commandMapper.toDto(existingCommand.get()));
+                commandsDtoOfTheDay.add(commandMapper.toDto(existingCommand.get()));
 
             } else {
 
@@ -168,7 +168,7 @@ public class CommandServiceImpl implements CommandService {
                             Etat.Attente,
                             restaurant.getId());
                     commandRepository.save(commandMapper.toEntity(commandDto));
-                    commandsOfTheDay.add(commandDto);
+                    commandsDtoOfTheDay.add(commandDto);
 
                 } else {
                     throw new CommandNotFoundException();
@@ -177,7 +177,7 @@ public class CommandServiceImpl implements CommandService {
         }
 
 
-        return commandsOfTheDay;
+        return commandsDtoOfTheDay;
     }
 
     @Override
@@ -186,6 +186,54 @@ public class CommandServiceImpl implements CommandService {
         return commandDtoList;
 
     }
+
+    @Override
+    public List<CommandDto> getCommandsBetweenTwoDates(LocalDate start, LocalDate end) {
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+        List<CommandDto> commandsDtoBetweenTwoDates = new ArrayList<>();
+        List<Command> ExistingCommandsBetweenTwoDates = new ArrayList<>();
+
+        for (Restaurant restaurant : restaurants) {
+            ExistingCommandsBetweenTwoDates = commandRepository.findCommandsBetweenDatesAndAndRestaurantId(restaurant.getId(), start, end);
+
+
+            if (ExistingCommandsBetweenTwoDates.size() == 7) {
+                for (Command command : ExistingCommandsBetweenTwoDates) {
+                    commandsDtoBetweenTwoDates.add(commandMapper.toDto(command));
+                }
+
+            } else {
+                for (LocalDate date = start; date.isBefore(end.plusDays(1)); date = date.plusDays(1)) {
+                    Optional<Matrix> matrix =
+                            matrixRepository.findFirstMatrixByRestaurantIdAndDayAndStartDateLessThanEqualOrderByStartDateDesc(
+                                    restaurant.getId(),
+                                    date.getDayOfWeek().getValue() - 1, // Get day of week from date
+                                    date
+                            );
+
+
+                    if (matrix.isPresent()) {
+
+                        /*sinon si la matrix existe on créé la newCommandDto*/
+                        CommandDto commandDto = new CommandDto(date,
+                                matrix.get().getQuantity(),
+                                Etat.Attente,
+                                restaurant.getId());
+                        commandRepository.save(commandMapper.toEntity(commandDto));
+                        commandsDtoBetweenTwoDates.add(commandDto);
+
+
+                    } else {
+                        throw new CommandNotFoundException();
+                    }
+                }
+            }
+        }
+
+
+        return commandsDtoBetweenTwoDates;
+    }
+
 
 
     @Override
@@ -199,14 +247,6 @@ public class CommandServiceImpl implements CommandService {
     }
 
 
-
-/*
-    @Override
-    public CommandDto getCommandByDateAndRestaurantId(LocalDate date,Long restaurantId){
-
-        return commandMapper.toDto(commandRepository.findCommandByDateAndRestaurantId(date, restaurantId));
-    }
-*/
 
 
 

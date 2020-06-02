@@ -52,7 +52,7 @@ public class CommandController {
     }
 
 
-    @GetMapping("/{restaurantId}/{dateString}")
+    @GetMapping("restaurant/{restaurantId}/{dateString}")
     public ResponseEntity<CommandDto> getCommandByRestaurantIdAndDate(@PathVariable Long restaurantId, @PathVariable String dateString) {
         LocalDate date = LocalDate.parse(dateString);
         return ResponseEntity.ok(commandMapper.toDto(commandService.getCommandByRestaurantIdAndDate(restaurantId, date)));
@@ -88,10 +88,20 @@ public class CommandController {
 
 
     @GetMapping("etat/{etat}/{stringDate}")
-    public List<CommandDto> getCommandsByDate(@PathVariable Etat etat, @PathVariable String stringDate) {
+    public List<CommandDto> getCommandsByEtatAndDate(@PathVariable Etat etat, @PathVariable String stringDate) {
         LocalDate date = LocalDate.parse(stringDate);
         return commandService.getCommandsByEtatAndDate(etat,date);
 
+    }
+
+
+    @GetMapping("/week/{id}/{stringStart}/{stringEnd}")
+    public List<CommandDto> getCommandsBetweenTwoDates(@PathVariable Long id,@PathVariable String stringStart,@PathVariable String stringEnd)
+    {
+
+        LocalDate start = LocalDate.parse(stringStart);
+        LocalDate end = LocalDate.parse(stringEnd);
+        return this.commandService.getCommandsBetweenTwoDates(start,end);
     }
 
 

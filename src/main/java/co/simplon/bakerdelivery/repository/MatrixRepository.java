@@ -24,6 +24,8 @@ Matrix findMatrixByRestaurantIdAndEndDateAndDay(Long restaurantId, LocalDate dat
 
 Matrix findMatrixByRestaurantIdAndEndDate(Long restaurantId, LocalDate date);
 
+/*    @Query("select m from Matrix m where  and m.startDate < :date order by m.startDate desc")
+    List<Matrix> findFirstMatrixBetweenTwoDatesAndStartDateLessThanEqualOrderByStartDateDesc(LocalDate start,LocalDate end);*/
 
     List<Matrix> findAllMatrixByRestaurantIdAndStartDateIsBeforeOrderByStartDateDesc(
             Long restaurantId,

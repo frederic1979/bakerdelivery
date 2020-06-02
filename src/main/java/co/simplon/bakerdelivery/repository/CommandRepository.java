@@ -27,6 +27,10 @@ public interface CommandRepository extends JpaRepository<Command,Long> {
      @Query("select command from Command command join command.restaurant restaurant where restaurant.id = :restaurantId and command.date >= :start and command.date <= :end")
      List<Command> findCommandsBetweenDatesAndAndRestaurantId(Long restaurantId, LocalDate start, LocalDate end);
 
+     @Query("select command from Command command  where command.date >= :start and command.date <= :end")
+     List<Command> findCommandsBetweenDates(LocalDate start, LocalDate end);
+
+
      List<Command> findCommandsByEtatAndDate(Etat etat, LocalDate date);
 
      Optional<Command> findCommandByRestaurantIdAndDate( Long restaurantId, LocalDate date);
